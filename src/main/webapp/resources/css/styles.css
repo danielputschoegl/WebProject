@@ -1,0 +1,25 @@
+@CHARSET "ISO-8859-1";
+
+.tableFont{
+	color: #212529;
+}
+
+.tableFont:hover, .tableFont:active, .tableFont:clicked{
+	colog: #212529; !important
+	text-decoration: underline;
+	
+}
+
+.h_line{
+	width:100%; 
+	height:1px; 
+	background: gray;
+}
+
+hr{
+	width: 100%;
+}
+
+.button{
+	width: 50%; !important
+}

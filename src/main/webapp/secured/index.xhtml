@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+<meta charset="UTF-8"/>
+<meta name="description" content="Softwareverwaltungsprogramm"/>
+<meta name="keywords" content="..."/>
+<meta name="author" content="Andrea Maier, ..."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link rel="stylesheet" href="static/CSS/sb-admin.css"/>
+<link rel="stylesheet" href="static/CSS/sb-admin.min.css"/>
+<link rel="stylesheet" href="static/CSS/font-awesome.css"/>
+<link rel="stylesheet" href="static/CSS/font-awesome.min.css"/>
+<link rel="stylesheet" href="static/CSS/dataTables.bootstrap4.css"/>
+<link rel="stylesheet" href="static/CSS/bootstrap.min.css"/>
+<link rel="stylesheet" href="static/CSS/styles.css"/>
+
+<title>Home</title>
+</head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+		id="mainNav">
+		<a class="navbar-brand" href="index.jsp">Software</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button"
+			data-toggle="collapse" data-target="#navbarResponsive"
+			aria-controls="navbarResponsive" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="Dashboard"><a class="nav-link" href="index.jsp"> <img
+						class="fa fa-fw fa-dashboard" src="Ressources/home.png" /> <span
+						class="nav-link-text">Home</span>
+				</a></li>
+				<li class="nav-item" data-toggle="tooltip" data-placement="right"
+					title="Charts"><a class="nav-link" href="add.jsp"> <img
+						class="fa fa-fw fa-area-chart" src="Ressources/add.png" /> <span
+						class="nav-link-text">Add</span>
+				</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" data-toggle="modal"
+					data-target="#exampleModal">TEeeeeeeeeeeeeest</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Body -->
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Breadcrumbs-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.jsp">Softwareverwaltungsprogramm</a></li>
+				<li class="breadcrumb-item active">Übersicht Software</li>
+			</ol>
+		</div>
+
+		<div class="card mb-3">
+			<div class="card-body">
+				<div class="table-responsive">
+
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>Softwarename</th>
+								<th>Softwarekategorie</th>
+								<th>Abteilung</th>
+								<th>Hauptveranwtortlicher</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Footer-->
+	<div class="content-wrapper">
+		<footer class="sticky-footer">
+			<div class="container">
+				<div class="text-center">
+					<small>PR_DKE WS 2017/18</small>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		
+	</script>
+</body>
+</html>

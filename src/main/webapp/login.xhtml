@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+<meta charset="UTF-8" />
+<meta name="description" content="Softwareverwaltungsprogramm" />
+<meta name="keywords" content="..." />
+<meta name="author" content="Andrea Maier, ..." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet" href="resources/css/sb-admin.css" />
+<link rel="stylesheet" href="resources/css/sb-admin.min.css" />
+<link rel="stylesheet" href="resources/css/font-awesome.css" />
+<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+<link rel="stylesheet" href="resources/css/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+<link rel="stylesheet" href="resources/css/styles.css" />
+
+<title>Home</title>
+</head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+		id="mainNav">
+		<a class="navbar-brand" href="login.xhtml">Home</a>
+	</nav>
+
+	<!-- Body -->
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Breadcrumbs-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="login.xhtml">Home</a></li>
+				<li class="breadcrumb-item active">Login</li>
+			</ol>
+		</div>
+
+		<div class="card mb-3">
+			<div class="card-body">
+				<div class="table-responsive">
+					<h:form>
+						<h:outputText value="Username: " />
+						<h:inputText id="username" value="#{login.username}"></h:inputText>
+						<h:message for="username"></h:message>
+						<br></br>
+						<br></br>
+
+						<h:outputText value="Password: " />
+						<h:inputSecret id="password" value="#{login.password}"></h:inputSecret>
+						<h:message for="password"></h:message>
+						<br></br>
+						<br></br>
+
+						<h:commandButton action="#{login.validateUsernamePassword}"
+							value="Login"></h:commandButton>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Footer-->
+	<div class="content-wrapper">
+		<footer class="sticky-footer">
+			<div class="container">
+				<div class="text-center">
+					<small>PR_DKE WS 2017/18</small>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		
+	</script>
+</body>
+</html>
