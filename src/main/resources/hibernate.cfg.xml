@@ -8,7 +8,7 @@
     <property name="connection.username"></property>
     <property name="connection.password"></property>
     <property name="connection.driver_class">org.sqlite.JDBC</property>
-    <property name="connection.url">jdbc:sqlite:C:\\Users\\Uni\\OneDrive\\Uni\\5. Semester\\DKE PR\\Eclipse\\WebProject\\dkepr.db</property>
+    <property name="connection.url">jdbc:sqlite:C:\\Users\\Anderas\\git\\WebProject01\\dkepr.db</property>
     <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
   
     <property name="show_sql">true</property>
