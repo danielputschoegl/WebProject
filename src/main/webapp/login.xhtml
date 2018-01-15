@@ -6,9 +6,9 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <head>
 <meta charset="UTF-8" />
-<meta name="description" content="Softwareverwaltungsprogramm" />
+<meta name="description" content="Project for Uni course DKE PR" />
 <meta name="keywords" content="..." />
-<meta name="author" content="Andrea Maier, ..." />
+<meta name="author" content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <link rel="stylesheet" href="resources/css/sb-admin.css" />
@@ -21,62 +21,25 @@
 
 <title>Home</title>
 </head>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
-
-	<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-		id="mainNav">
-		<a class="navbar-brand" href="login.xhtml">Home</a>
-	</nav>
-
-	<!-- Body -->
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<!-- Breadcrumbs-->
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="login.xhtml">Home</a></li>
-				<li class="breadcrumb-item active">Login</li>
-			</ol>
-		</div>
-
-		<div class="card mb-3">
+<body class="bg-dark">
+	<div class="container">
+		<div class="card card-login mx-auto mt-5">
+			<div class="card-header">Login</div>
 			<div class="card-body">
-				<div class="table-responsive">
-					<h:form>
-						<h:outputText value="Username: " />
-						<h:inputText id="username" value="#{login.username}"></h:inputText>
-						<h:message for="username"></h:message>
-						<br></br>
-						<br></br>
-
-						<h:outputText value="Password: " />
-						<h:inputSecret id="password" value="#{login.password}"></h:inputSecret>
-						<h:message for="password"></h:message>
-						<br></br>
-						<br></br>
-
-						<h:commandButton action="#{login.validateUsernamePassword}"
+				<h:form>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Username</label> 
+						<h:inputText class="form-control" id="username" value="#{login.username}" placeholder="Username"></h:inputText>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label> 
+						<h:inputSecret class="form-control" id="password" value="#{login.password}" placeholder="Password"></h:inputSecret>
+					</div>
+					<h:commandButton class="btn btn-primary btn-block" action="#{login.validateUsernamePassword}"
 							value="Login"></h:commandButton>
-					</h:form>
-				</div>
+				</h:form>
 			</div>
 		</div>
 	</div>
-
-
-	<!-- Footer-->
-	<div class="content-wrapper">
-		<footer class="sticky-footer">
-			<div class="container">
-				<div class="text-center">
-					<small>PR_DKE WS 2017/18</small>
-				</div>
-			</div>
-		</footer>
-	</div>
-
-	<script>
-		
-	</script>
 </body>
 </html>

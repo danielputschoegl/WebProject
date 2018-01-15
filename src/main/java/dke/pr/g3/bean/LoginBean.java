@@ -6,6 +6,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import dke.pr.g3.db.DBConnection;
+import dke.pr.g3.entities.User;
 
 @ManagedBean(name = "login", eager = true)
 @SessionScoped
@@ -15,12 +16,13 @@ public class LoginBean {
 	private boolean loggedIn = false;
 
 	public String validateUsernamePassword() {
-		boolean valid = DBConnection.checkUserInformation(username, password);
+		User user = DBConnection.checkUserInformation(username, password);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		if (valid) {
+		if (user != null) {
 			this.loggedIn = true;
 			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 			session.setAttribute("loginBean", this);
+			session.setAttribute("user", user);
 			return "index";
 		} else {
 			facesContext.addMessage(

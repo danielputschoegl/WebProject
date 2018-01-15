@@ -8,36 +8,42 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import dke.pr.g3.Type;
-import dke.pr.g3.Status;
+import dke.pr.g3.model.Status;
+import dke.pr.g3.model.Type;
 
 @Entity
 public class Message {
 	@Id
-	@Column(name = "id")
+	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne
+	@ManyToOne
 	private User createdBy;
 	
-	@Column(name = "created_by")
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column
 	private Date createdAt;
 	
-	@Column(name = "message")
+	@Column
 	private String message;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "type")
+	@Column
 	private Type type;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "status")
+	@Column
 	private Status status;
 	
-	@OneToOne
+	@ManyToOne
 	private User statusBy;
 	
 	public Message() {

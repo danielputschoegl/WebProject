@@ -1,4 +1,4 @@
-package dke.pr.g3;
+package dke.pr.g3.model;
 
 public enum Role {
 	RD("rule developer"), RA("repository admin"), D("domain expert"), U("user");

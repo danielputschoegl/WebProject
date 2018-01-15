@@ -6,19 +6,19 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-import dke.pr.g3.Role;
+import dke.pr.g3.model.Role;
 
 @Entity
 public class User {
 	@Id
-	@Column(name = "username")
+	@Column
     private String username;
 
-	@Column(name = "password")
+	@Column
     private String password;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name = "role")
+	@Column
     private Role role;
 	
 	public User() {
