@@ -39,7 +39,7 @@
 	<!-- Navigation-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="mainNav">
-		<a class="navbar-brand" href="index.xhtml">Dashboard</a>
+		<a class="navbar-brand" href="secured/index.xhtml">Messages</a>
 		<button class="navbar-toggler navbar-toggler-right" type="button"
 			data-toggle="collapse" data-target="#navbarResponsive"
 			aria-controls="navbarResponsive" aria-expanded="false"
@@ -49,12 +49,12 @@
 
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-			
-			
-			
+
+
+
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="Dashboard"><a class="nav-link" href="index.html"> <i
-						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Dashboard</span>
+						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Messages</span>
 				</a></li>
 				<li class="nav-item" data-toggle="tooltip" data-placement="right"
 					title="Charts"><a class="nav-link" href="charts.html"> <i
@@ -147,33 +147,30 @@
 
 
 		<div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-bell-o"></i>Messages</div>
-            <div class="list-group list-group-flush small">
-            
-            <c:foreach items="" var="">
-              <a class="list-group-item list-group-item-action" href="#">
-                <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/45x45" alt="">
-                  <div class="media-body">
-                    <strong>David Miller</strong>posted a new article to
-                    <strong>David Miller Website</strong>.
-                    <div class="text-muted smaller">Today at 5:43 PM - 5m ago</div>
-                  </div>
-                </div>
-              </a>
-              </c:foreach>
-              
-              
-              <a class="list-group-item list-group-item-action" href="#">View all activity...</a>
-            </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
-        </div>
-      </div>
+			<div class="card-header">
+				<i class="fa fa-bell-o"></i>Messages
+			</div>
+			<div class="list-group list-group-flush small">
+
+					<a class="list-group-item list-group-item-action" href="#">
+						<div class="media">
+							<img class="d-flex mr-3 rounded-circle"
+								src="http://placehold.it/45x45" alt="" />
+							<div class="media-body">
+								<strong>David Miller</strong>posted a new article to <strong>David
+									Miller Website</strong>.
+								<div class="text-muted smaller">Today at 5:43 PM - 5m ago</div>
+							</div>
+						</div>
+					</a>
 
 
-		
+				<a class="list-group-item list-group-item-action" href="#">View
+					all activity...</a>
+			</div>
+			<div class="card-footer small text-muted">Updated yesterday at
+				11:59 PM</div>
+		</div>
 	</div>
 
 

@@ -7,10 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import dke.pr.g3.model.Role;
 
@@ -34,14 +31,18 @@ public class MessageRecipient {
 	@Column
 	private boolean toAll;
 	
+	@Column
+	private String subject;
+	
 	public MessageRecipient() {
 	}
 
-	public MessageRecipient(Long messageId, User user, Role role, boolean toAll) {
+	public MessageRecipient(Long messageId, User user, Role role, boolean toAll, String subject) {
 		this.messageId = messageId;
 		this.user = user;
 		this.role = role;
 		this.toAll = toAll;
+		this.subject = subject;
 	}
 	
 	public long getId() {
@@ -82,5 +83,13 @@ public class MessageRecipient {
 
 	public void setToAll(boolean toAll) {
 		this.toAll = toAll;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 }

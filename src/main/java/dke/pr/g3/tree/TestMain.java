@@ -1,4 +1,4 @@
-package dke.pr.tree;
+package dke.pr.g3.tree;
 
 import java.io.IOException;
 import java.io.Writer;

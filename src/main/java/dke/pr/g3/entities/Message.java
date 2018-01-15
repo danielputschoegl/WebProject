@@ -8,10 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,6 +30,9 @@ public class Message {
 	private Date createdAt;
 	
 	@Column
+	private String subject;
+	
+	@Column
 	private String message;
 	
 	@Enumerated(EnumType.STRING)
@@ -49,9 +49,10 @@ public class Message {
 	public Message() {
 	}
 	
-	public Message(User createdBy, Date createdAt, String message, Type type, Status status, User statusBy) {
+	public Message(User createdBy, Date createdAt, String subject, String message, Type type, Status status, User statusBy) {
 		this.createdBy = createdBy;
 		this.createdAt = createdAt;
+		this.subject = subject;
 		this.message = message;
 		this.type = type;
 		this.status = status;
@@ -80,6 +81,14 @@ public class Message {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
 
 	public String getMessage() {

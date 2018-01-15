@@ -156,6 +156,19 @@ public class DBConnection {
 			session.close();
 		}
 	}
+	
+	public static List<MessageRecipient> getMessageListForUser(User user) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			@SuppressWarnings("unchecked")
+			List<MessageRecipient> messages = session.createQuery("FROM MessageRecipient WHERE user = :user OR role = :role OR toAll = 1)")
+					.setParameter("user", user).setParameter("role", user.getRole()).list();
+			return messages;
+		} finally {
+			session.close();
+		}
+	}
 
 	public static List<Message> getAllMessagesForUser(User user) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -181,21 +194,21 @@ public class DBConnection {
 		return null;
 	}
 
-	public static void newMessage(User currentuser, String message, Type type, Status status, List<User> users) {
-		DBConnection.newMessage(currentuser, message, type, status, users, null, false);
+	public static void newMessage(User currentuser, String subject, String message, Type type, Status status, List<User> users) {
+		DBConnection.newMessage(currentuser, subject, message, type, status, users, null, false);
 	}
 
-	public static void newMessage(User currentuser, String message, Type type, Status status, Collection<Role> role) {
-		DBConnection.newMessage(currentuser, message, type, status, null, (List<Role>) role, false);
+	public static void newMessage(User currentuser, String subject, String message, Type type, Status status, Collection<Role> role) {
+		DBConnection.newMessage(currentuser, subject, message, type, status, null, (List<Role>) role, false);
 	}
 
-	public static void newMessage(User currentuser, String message, Type type, Status status, boolean toAll) {
-		DBConnection.newMessage(currentuser, message, type, status, null, null, toAll);
+	public static void newMessage(User currentuser, String subject, String message, Type type, Status status, boolean toAll) {
+		DBConnection.newMessage(currentuser, subject, message, type, status, null, null, toAll);
 	}
 
-	public static void newMessage(User currentUser, String message, Type type, Status status, List<User> users,
+	public static void newMessage(User currentUser, String subject, String message, Type type, Status status, List<User> users,
 			List<Role> roles, boolean toAll) {
-		DBConnection.newMessage(new Message(currentUser, new Date(), message, type, status, currentUser), users, roles,
+		DBConnection.newMessage(new Message(currentUser, new Date(), subject, message, type, status, currentUser), users, roles,
 				toAll);
 	}
 
@@ -210,20 +223,20 @@ public class DBConnection {
 			if (users != null) {
 				for (User user : users) {
 					transaction = session.beginTransaction();
-					session.save(new MessageRecipient(msg.getId(), user, null, false));
+					session.save(new MessageRecipient(msg.getId(), user, null, false, msg.getSubject()));
 					transaction.commit();
 				}
 			}
 			if (roles != null) {
 				for (Role role : roles) {
 					transaction = session.beginTransaction();
-					session.save(new MessageRecipient(msg.getId(), null, role, false));
+					session.save(new MessageRecipient(msg.getId(), null, role, false, msg.getSubject()));
 					transaction.commit();
 				}
 			}
 			if (toAll != false) {
 				transaction = session.beginTransaction();
-				session.save(new MessageRecipient(msg.getId(), null, null, toAll));
+				session.save(new MessageRecipient(msg.getId(), null, null, toAll, msg.getSubject()));
 				transaction.commit();
 			}
 		} catch (HibernateException e) {

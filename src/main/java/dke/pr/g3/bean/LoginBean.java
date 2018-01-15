@@ -23,7 +23,7 @@ public class LoginBean {
 			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 			session.setAttribute("loginBean", this);
 			session.setAttribute("user", user);
-			return "index";
+			return "secured/index?faces-redirect=true";
 		} else {
 			facesContext.addMessage(
 					null,
