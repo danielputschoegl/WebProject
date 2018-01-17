@@ -2,9 +2,12 @@ package dke.pr.g3.bean;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import dke.pr.cli.CBRInterface;
 
@@ -18,7 +21,6 @@ public class IndexBeanAndi {
 
 			fl.setDebug(false);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "ready";
@@ -37,8 +39,37 @@ public class IndexBeanAndi {
 		String out = "";
 		List<String[]> hierarchy = fl.getCtxHierarchy();
 		for (String[] element : hierarchy) {
-			out += " " + element[0] + " unter " + element[1] + "\n";
+			out += "{source: \"" + element[0] + "\", target: \"" + element[1] + "\", type: \"suit\"},";
 		}
+		return out;
+	}
+
+	public String getParameterValuesHiearchy() throws IOException {
+		String out = "";
+		List<String[]> hierarchy;
+		List<String> parameterValues = fl.getParameters();
+		for (String parameterValue : parameterValues) {
+			// {source: "Oracle", target: "Google", type: "suit"},
+			hierarchy = fl.getParameterValuesHiearchy(parameterValue);
+			for (String[] element : hierarchy) {
+				// {source: "Oracle", target: "Google", type: "suit"},
+				out += "{source: \"" + element[1] + "\", target: \"" + element[0] + "\", type: \"suit\"},";
+				System.out.println("{source: \"" + element[0] + "\", target: \"" + element[1] + "\", type: \"suit\"},");
+				System.out.println();
+			}
+		}
+		return out;
+	}
+
+	public boolean delParameter(String pName) throws IOException {
+		boolean out = false;
+		out = fl.delParameter(pName);
+		return out;
+	}
+
+	public boolean delCtx(String ctx, boolean fileAlso) throws Exception {
+		boolean out = false;
+		out = fl.delCtx(ctx, fileAlso);
 		return out;
 	}
 
@@ -63,6 +94,18 @@ public class IndexBeanAndi {
 		for (String element : parameters) {
 			out += " " + element + "\n";
 		}
+		return out;
+	}
+
+	public boolean restart() throws IOException {
+		boolean out = false;
+		out = fl.restart();
+		return out;
+	}
+
+	public boolean updateDetParamValue(String param, String def) throws IOException {
+		boolean out = false;
+		out = fl.updateDetParamValue(param, def);
 		return out;
 	}
 
@@ -110,7 +153,8 @@ public class IndexBeanAndi {
 		}
 		return out;
 	}
-	public String getNOTAMS() throws IOException{
+
+	public String getNOTAMS() throws IOException {
 		String out = "";
 		List<String> NOTAMS = fl.getNOTAMS();
 		for (String element : NOTAMS) {
@@ -118,63 +162,85 @@ public class IndexBeanAndi {
 		}
 		return out;
 	}
-	// public String setParameterValues() {
-	// String out = "";
-	// fl.addParameter(name, rootValue, detParamDef)
-	// return out;
-	// }
-	//
-	// public String getParameter() throws IOException {
-	// String out = "";
-	// out += fl.getParameters();
-	// return out;
-	// }
-	//
-	// public String getParameterValues() throws IOException {
-	// String out = "";
-	// out += fl.getParameterValues();
-	// return out;
-	// }
-	//
-	// public String delParameter() throws IOException {
-	// String out = "";
-	// fl.delParameter("Interest");
-	// out += "delete: Interest";
-	// return out;
-	// }
 
-	// public String getContextHierarchy() throws IOException {
-	// String out = "";
-	// List<String[]> hir = fl.getCtxHierarchy();
-	// /*
-	// * Object[] hier = fl.getCtxHierarchy().toArray(); for(int i = 0; i <
-	// * hier.length; i++) { out+=hier[i].toString()+";<br>"; }
-	// */
-	// String[][] treeBase = new String[hir.size()][2];
-	// for (int i = 0; i < hir.size(); i++) {
-	// out += "" + hir.get(i).length + " sub: " + hir.get(i)[0] + ", super: " +
-	// hir.get(i)[1] + "<br>";
-	// treeBase[i][0] = hir.get(i)[0];
-	// treeBase[i][1] = hir.get(i)[1];
-	// }
-	// for (int i = 0; i < treeBase.length; i++) {
-	// for (int j = 0; j < treeBase[i].length; j++) {
-	// System.out.println(treeBase[i][j]);
-	// }
-	// }
-	// System.out.println();
-	// for (int j = 0; j < treeBase.length; j++) {
-	// System.out.println(treeBase[j][0] + " " + treeBase[j][1]);
-	// }
-	// // out += "hierarchy: ";
-	// // out += fl.getCtxHierarchy();
-	// return out;
-	// }
-	//
-	// public String getContext() throws IOException {
-	// String out = "";
-	// out += fl.getCtxs();
-	// return out;
-	// }
+	public boolean addParameter(String pName, String rootValue, String detParamDef) throws IOException {
+		boolean out = false;
+		out = fl.addParameter(pName, rootValue, detParamDef);
+		return out;
+	}
 
+	public boolean addParameterValue(String pName, String vName, String[] parents, String[] children) throws Exception {
+		boolean out = false;
+		out = fl.addParameterValue(pName, vName, parents, children);
+		return out;
+	}
+
+	public boolean delParameterValue(String vName) throws IOException {
+		boolean out = false;
+		out = fl.delParameterValue(vName);
+		return out;
+	}
+
+	public boolean addCtx(String ctxDef, String fCtx) throws IOException {
+		boolean out = false;
+		out = fl.addCtx(ctxDef, fCtx);
+		return out;
+	}
+
+	public String getRules(String ctx) throws Exception {
+		String out = "";
+		HashMap<String, String> selects = fl.getRules(ctx);
+		for (Entry<String, String> entry : selects.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			out += key + " " + value;
+		}
+		return out;
+	}
+
+	public String getRules() throws Exception {
+		String out = "";
+		HashMap<String, String> rules;
+		List<String> ctxs = fl.getCtxs();
+		for (String ctx : ctxs) {
+			rules = fl.getRules(ctx);
+			for (Entry<String, String> entry : rules.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				out += key + " " + value;
+			}
+		}
+		return out;
+	}
+
+	public ArrayList<String> getRulesAsArrayList() throws Exception {
+		ArrayList<String> out = new ArrayList<String>();
+		HashMap<String, String> rules;
+		List<String> ctxs = fl.getCtxs();
+		for (String ctx : ctxs) {
+			rules = fl.getRules(ctx);
+			for (Entry<String, String> entry : rules.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				out.add(key + " " + value);
+			}
+		}
+		return out;
+	}
+
+	public boolean delRule(String ctx, String ruleID) throws Exception {
+		boolean out = false;
+		out = fl.delRule(ctx, ruleID);
+		return out;
+	}
+
+	public String getISpecs() throws IOException {
+		String out = "";
+		List<String> iSpecs = fl.getISpecs();
+		for (String element : iSpecs) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
 }
