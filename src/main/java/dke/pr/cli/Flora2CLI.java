@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class Flora2CLI {
 
-	private boolean debug = true;
+	private boolean debug = false;
 
 	/**
 	 * object for communicating with flora2 shell
@@ -42,9 +42,12 @@ public class Flora2CLI {
 	 * @throws IOException
 	 */
 	public Flora2CLI() throws IOException {
+		start();
+	}
+
+	public boolean start() throws IOException {
 		ProcessBuilder builder = new ProcessBuilder(
 				"C:\\Users\\Anderas\\Flora-2\\flora2\\runflora.bat");
-				//"C:\\Users\\Uni\\Flora-2\\flora2\\runflora.bat");
 
 		builder.redirectErrorStream(true);
 
@@ -53,6 +56,7 @@ public class Flora2CLI {
 		pw = new PrintWriter(process.getOutputStream());
 
 		getOutput();
+		return true;
 	}
 
 	/**
@@ -149,13 +153,12 @@ public class Flora2CLI {
 				Matcher matcher = REGEX_VAR.matcher(line);
 				if (matcher.find())
 					set[i++] = matcher.group();
-			}else if (i==varCnt){
+			} else if (i == varCnt) {
 				parsed.add(set);
 			}
 		}
 		return parsed;
 	}
-
 
 	/**
 	 * Parses a query result with a single variable
@@ -176,7 +179,7 @@ public class Flora2CLI {
 		}
 		return parsed;
 	}
-	
+
 	/**
 	 * Whether the flora2 shell output is redirected to the console or not
 	 * 
