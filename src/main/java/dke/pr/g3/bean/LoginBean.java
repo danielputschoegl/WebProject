@@ -11,18 +11,19 @@ import dke.pr.g3.entities.User;
 @ManagedBean(name = "login", eager = true)
 @SessionScoped
 public class LoginBean {
+	private User user;
 	private String username;
 	private String password;
 	private boolean loggedIn = false;
 
 	public String validateUsernamePassword() {
-		User user = DBConnection.checkUserInformation(username, password);
+		this.user = DBConnection.checkUserInformation(username, password);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		if (user != null) {
+		if (this.user != null) {
 			this.loggedIn = true;
 			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 			session.setAttribute("loginBean", this);
-			session.setAttribute("user", user);
+			session.setAttribute("user", this.user);
 			return "secured/index?faces-redirect=true";
 		} else {
 			facesContext.addMessage(
@@ -32,6 +33,10 @@ public class LoginBean {
 							"Please enter correct username and Password"));
 			return "login";
 		}
+	}
+	
+	public User getUser() {
+		return this.user;
 	}
 	
 	public String getUsername() {

@@ -1,6 +1,5 @@
 package dke.pr.g3.db;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -58,8 +57,7 @@ public class DBConnection {
 		try {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("unchecked")
-			List<User> resultList = session
-					.createQuery("FROM User").list();
+			List<User> resultList = session.createQuery("FROM User").list();
 			transaction.commit();
 			return resultList;
 		} catch (HibernateException e) {
@@ -80,8 +78,7 @@ public class DBConnection {
 		try {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("unchecked")
-			List<User> resultList = session
-					.createQuery("FROM User u WHERE u.username = :username")
+			List<User> resultList = session.createQuery("FROM User u WHERE u.username = :username")
 					.setParameter("username", username).list();
 			transaction.commit();
 			for (User next : resultList) {
@@ -92,6 +89,22 @@ public class DBConnection {
 			if (transaction != null) {
 				transaction.rollback();
 			}
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	public static List<User> getUsersByRole(Role role) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			@SuppressWarnings("unchecked")
+			List<User> resultList = session.createQuery("FROM User WHERE role = :role").setParameter("role", role)
+					.list();
+			return resultList;
+		} catch (HibernateException e) {
+			e.printStackTrace();
 		} finally {
 			session.close();
 		}
@@ -145,6 +158,20 @@ public class DBConnection {
 		DBConnection.newUser(new User(username, password, role));
 	}
 
+	public static Message getMessageById(Long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+
+		try {
+			return (Message) session.get(Message.class, id);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return null;
+	}
+
 	public static List<Message> getAllMessages() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -156,13 +183,14 @@ public class DBConnection {
 			session.close();
 		}
 	}
-	
+
 	public static List<MessageRecipient> getMessageListForUser(User user) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 			@SuppressWarnings("unchecked")
-			List<MessageRecipient> messages = session.createQuery("FROM MessageRecipient WHERE user = :user OR role = :role OR toAll = 1)")
+			List<MessageRecipient> messages = session
+					.createQuery("FROM MessageRecipient WHERE user = :user OR role = :role OR toAll = 1")
 					.setParameter("user", user).setParameter("role", user.getRole()).list();
 			return messages;
 		} finally {
@@ -178,9 +206,10 @@ public class DBConnection {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			List<Message> messages = session
-					.createQuery("FROM Message WHERE id = "
-							+ "(SELECT messageId FROM MessageRecipient WHERE user = :user OR role = :role OR toAll = 1)")
-					.setParameter("user", user).setParameter("role", user.getRole()).list();
+					.createQuery("FROM Message WHERE id IN "
+							+ "(SELECT messageId FROM MessageRecipient WHERE user = :user)"
+							+ "AND createdBy <> :user")
+					.setParameter("user", user).list();
 			transaction.commit();
 			return messages;
 		} catch (HibernateException e) {
@@ -194,25 +223,23 @@ public class DBConnection {
 		return null;
 	}
 
-	public static void newMessage(User currentuser, String subject, String message, Type type, Status status, List<User> users) {
-		DBConnection.newMessage(currentuser, subject, message, type, status, users, null, false);
+	public static void newMessage(User currentuser, String subject, String message, Type type, Status status,
+			List<User> users) {
+		DBConnection.newMessage(currentuser, subject, message, type, status, users, null);
 	}
 
-	public static void newMessage(User currentuser, String subject, String message, Type type, Status status, Collection<Role> role) {
-		DBConnection.newMessage(currentuser, subject, message, type, status, null, (List<Role>) role, false);
+	public static void newMessage(User currentuser, String subject, String message, Type type, Status status,
+			Collection<Role> role) {
+		DBConnection.newMessage(currentuser, subject, message, type, status, null, (List<Role>) role);
 	}
 
-	public static void newMessage(User currentuser, String subject, String message, Type type, Status status, boolean toAll) {
-		DBConnection.newMessage(currentuser, subject, message, type, status, null, null, toAll);
+	public static void newMessage(User currentUser, String subject, String message, Type type, Status status,
+			List<User> users, List<Role> roles) {
+		DBConnection.newMessage(new Message(currentUser, new Date(), subject, message, type, status, currentUser),
+				users, roles);
 	}
 
-	public static void newMessage(User currentUser, String subject, String message, Type type, Status status, List<User> users,
-			List<Role> roles, boolean toAll) {
-		DBConnection.newMessage(new Message(currentUser, new Date(), subject, message, type, status, currentUser), users, roles,
-				toAll);
-	}
-
-	public static void newMessage(Message msg, List<User> users, List<Role> roles, boolean toAll) {
+	public static void newMessage(Message msg, List<User> users, List<Role> roles) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 
@@ -223,21 +250,18 @@ public class DBConnection {
 			if (users != null) {
 				for (User user : users) {
 					transaction = session.beginTransaction();
-					session.save(new MessageRecipient(msg.getId(), user, null, false, msg.getSubject()));
+					session.save(new MessageRecipient(msg.getId(), user));
 					transaction.commit();
 				}
 			}
 			if (roles != null) {
 				for (Role role : roles) {
-					transaction = session.beginTransaction();
-					session.save(new MessageRecipient(msg.getId(), null, role, false, msg.getSubject()));
-					transaction.commit();
+					for (User user : DBConnection.getUsersByRole(role)) {
+						transaction = session.beginTransaction();
+						session.save(new MessageRecipient(msg.getId(), user));
+						transaction.commit();
+					}
 				}
-			}
-			if (toAll != false) {
-				transaction = session.beginTransaction();
-				session.save(new MessageRecipient(msg.getId(), null, null, toAll, msg.getSubject()));
-				transaction.commit();
 			}
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -259,6 +283,25 @@ public class DBConnection {
 			message.setStatus(status);
 			message.setStatusBy(currentUser);
 			session.update(message);
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+	}
+
+	public static void deleteMessageForUser(User user, Long messageId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			Message message = (Message) session.get(Message.class, messageId);
+			session.delete(message);
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();

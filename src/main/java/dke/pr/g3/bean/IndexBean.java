@@ -3,27 +3,16 @@ package dke.pr.g3.bean;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import dke.pr.cli.CBRInterface;
-import dke.pr.g3.db.DBConnection;
-import dke.pr.g3.entities.User;
 
 @ManagedBean(name = "index", eager = true)
 @ViewScoped
 public class IndexBean {
 	CBRInterface fl;
-	
-	public String goToMessages() {
-			return "secured/messages";
-	}
 
 	public String init() throws IOException {
 		try {

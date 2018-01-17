@@ -32,157 +32,166 @@
 	<h:outputStylesheet name="css/font-awesome.min.css" />
 	<h:outputStylesheet name="css/styles.css" />
 
-	<h:title>Home</h:title>
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<h:form>
 
-	<!-- Navigation-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-		id="mainNav">
-		<a class="navbar-brand" href="secured/index.xhtml">Messages</a>
-		<button class="navbar-toggler navbar-toggler-right" type="button"
-			data-toggle="collapse" data-target="#navbarResponsive"
-			aria-controls="navbarResponsive" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			id="mainNav">
+			<a class="navbar-brand" href="secured/index.xhtml">Messages</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
-
-
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Dashboard"><a class="nav-link" href="index.html"> <i
-						class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Messages</span>
-				</a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Charts"><a class="nav-link" href="charts.html"> <i
-						class="fa fa-fw fa-area-chart"></i> <span class="nav-link-text">Charts</span>
-				</a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Tables"><a class="nav-link" href="tables.html"> <i
-						class="fa fa-fw fa-table"></i> <span class="nav-link-text">Tables</span>
-				</a></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Components"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseComponents" data-parent="#exampleAccordion"> <i
-						class="fa fa-fw fa-wrench"></i> <span class="nav-link-text">Components</span>
-				</a>
-					<ul class="sidenav-second-level collapse" id="collapseComponents">
-						<li><a href="navbar.html">Navbar</a></li>
-						<li><a href="cards.html">Cards</a></li>
-					</ul></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Example Pages"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseExamplePages" data-parent="#exampleAccordion"> <i
-						class="fa fa-fw fa-file"></i> <span class="nav-link-text">Example
-							Pages</span>
-				</a>
-					<ul class="sidenav-second-level collapse" id="collapseExamplePages">
-						<li><a href="login.html">Login Page</a></li>
-						<li><a href="register.html">Registration Page</a></li>
-						<li><a href="forgot-password.html">Forgot Password Page</a></li>
-						<li><a href="blank.html">Blank Page</a></li>
-					</ul></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Menu Levels"><a
-					class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
-					href="#collapseMulti" data-parent="#exampleAccordion"> <i
-						class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Menu
-							Levels</span>
-				</a>
-					<ul class="sidenav-second-level collapse" id="collapseMulti">
-						<li><a href="#">Second Level Item</a></li>
-						<li><a href="#">Second Level Item</a></li>
-						<li><a href="#">Second Level Item</a></li>
-						<li><a class="nav-link-collapse collapsed"
-							data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-							<ul class="sidenav-third-level collapse" id="collapseMulti2">
-								<li><a href="#">Third Level Item</a></li>
-								<li><a href="#">Third Level Item</a></li>
-								<li><a href="#">Third Level Item</a></li>
-							</ul></li>
-					</ul></li>
-				<li class="nav-item" data-toggle="tooltip" data-placement="right"
-					title="Link"><a class="nav-link" href="#"> <i
-						class="fa fa-fw fa-link"></i> <span class="nav-link-text">Link</span>
-				</a></li>
-
-
-
-			</ul>
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown"
-					href="#" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> <i class="fa fa-fw fa-envelope"></i> <span
-						class="d-lg-none">Messages <span
-							class="badge badge-pill badge-primary">12 New</span>
-					</span> <span class="indicator text-primary d-none d-lg-block"> <i
-							class="fa fa-fw fa-circle"></i>
-					</span>
-				</a></li>
-				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal">#{loginBean.getUsername()}</a></li>
-				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout
-				</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	<!-- Body -->
-	<div class="content-wrapper">
-		<div class="container-fluid">
-			<!-- Breadcrumbs-->
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item">Dashboard</li>
-				<li class="breadcrumb-item active">Messages</li>
-			</ol>
-		</div>
-
-
-
-		<div class="card mb-3">
-			<div class="card-header">
-				<i class="fa fa-bell-o"></i>Messages
-			</div>
-			<div class="list-group list-group-flush small">
-
-					<a class="list-group-item list-group-item-action" href="#">
-						<div class="media">
-							<img class="d-flex mr-3 rounded-circle"
-								src="http://placehold.it/45x45" alt="" />
-							<div class="media-body">
-								<strong>David Miller</strong>posted a new article to <strong>David
-									Miller Website</strong>.
-								<div class="text-muted smaller">Today at 5:43 PM - 5m ago</div>
-							</div>
+					<li class="nav-item container-fluid" data-toggle="tooltip"
+						data-placement="right" title="Dashboard">
+						<div class="container-fluid">
+							<h:button class="btn btn-primary btn-block"
+								outcome="newMessage?faces-redirect=true" value="New Message" />
 						</div>
-					</a>
+					</li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Dashboard"><a class="nav-link" href="index.html">
+							<i class="fa fa-fw fa-inbox"></i> <span class="nav-link-text">Inbox</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Dashboard"><a class="nav-link" href="index.html">
+							<i class="fa fa-fw fa-share"></i> <span class="nav-link-text">Sent</span>
+					</a></li>
 
-
-				<a class="list-group-item list-group-item-action" href="#">View
-					all activity...</a>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown"
+						href="#" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fa fa-fw fa-envelope"></i> <span
+							class="d-lg-none">Messages <span
+								class="badge badge-pill badge-primary">12 New</span>
+						</span> <span class="indicator text-primary d-none d-lg-block"> <i
+								class="fa fa-fw fa-circle"></i>
+						</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+						data-target="#exampleModal">#{loginBean.getUsername()}</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+						data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout
+					</a></li>
+				</ul>
 			</div>
-			<div class="card-footer small text-muted">Updated yesterday at
-				11:59 PM</div>
-		</div>
-	</div>
+		</nav>
+
+		<!-- Body -->
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><h:link
+							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
+					<li class="breadcrumb-item active">Messages</li>
+				</ol>
+			</div>
 
 
-	<!-- Footer-->
-	<div class="content-wrapper">
-		<footer class="sticky-footer">
-			<div class="container">
-				<div class="text-center">
-					<small>PR_DKE WS 2017/18</small>
+
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-envelope"></i> Messages
 				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr class="bg-light">
+									<th>From</th>
+									<th>Subject</th>
+									<th>Date</th>
+									<th>Type</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="bg-light">
+									<th>From</th>
+									<th>Subject</th>
+									<th>Date</th>
+									<th>Type</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<c:forEach var="msg"
+									items="#{message.getMessages(login.getUser())}">
+									<tr>
+										<th style="font-weight:normal"><h:link
+												outcome="messageDetails.xhtml?faces-redirect=true"
+												class="text-dark">
+												<f:param name="id" value="#{msg.getId()}" />
+            									#{msg.getCreatedBy().getUsername()}
+        									</h:link></th>
+										<th style="font-weight:normal"><h:link
+												outcome="messageDetails.xhtml?faces-redirect=true"
+												class="text-dark">
+												<f:param name="id" value="#{msg.getId()}" />
+            									#{msg.getSubject()}
+        									</h:link></th>
+										<th style="font-weight:normal"><h:link
+												outcome="messageDetails.xhtml?faces-redirect=true"
+												class="text-dark">
+												<f:param name="id" value="#{msg.getId()}" />
+												<h:outputText value="#{msg.getCreatedAt()}">
+													<f:convertDateTime type="date" timeZone="GMT+01:00"
+														pattern="HH:mm:ss     dd.MM.yyyy" />
+												</h:outputText>
+											</h:link></th>
+										<th style="font-weight:normal"><h:link
+												outcome="messageDetails.xhtml?faces-redirect=true"
+												class="text-dark">
+												<f:param name="id" value="#{msg.getId()}" />
+												#{msg.getType().toString()}
+											</h:link></th>
+										<th style="font-weight:normal"><h:link
+												outcome="messageDetails.xhtml?faces-redirect=true"
+												class="text-dark">
+												<f:param name="id" value="#{msg.getId()}" />
+												#{msg.getStatus().toString()}
+											</h:link></th>
+										<th style="font-weight:normal"><h:commandLink
+												action="#{message.deleteMessage(msg.getId())}"
+												class="text-dark">
+												<i class="fa fa-fw fa-trash"></i>
+											</h:commandLink></th>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer small text-muted">Last Update:
+					#{currentDate}</div>
 			</div>
-		</footer>
-	</div>
+		</div>
+
+
+		<!-- Footer-->
+		<div class="content-wrapper">
+			<footer class="sticky-footer">
+				<div class="container">
+					<div class="text-center">
+						<small>PR_DKE WS 2017/18</small>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</h:form>
 </h:body>
 </html>

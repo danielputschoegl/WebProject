@@ -1,7 +1,7 @@
 package dke.pr.g3.model;
 
 public enum Role {
-	RD("rule developer"), RA("repository admin"), D("domain expert"), U("user");
+	RD("Rule Developer"), RA("Repository Admin"), D("Domain Expert"), U("User");
 	
 	private String role;
 	
@@ -9,7 +9,7 @@ public enum Role {
 		this.role = role;
 	}
 	
-	public String getRole() {
+	public String toString() {
 		return this.role;
 	}
 }

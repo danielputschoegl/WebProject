@@ -1,7 +1,7 @@
 package dke.pr.g3.model;
 
 public enum Status {
-	U("undealt"), P("in progress"), R("rejected"), C("completed");
+	U("Undealt"), P("In progress"), R("Rejected"), C("Completed");
 	
 	private String status;
 	
@@ -9,7 +9,7 @@ public enum Status {
 		this.status = status;
 	}
 
-	public String getStatus() {
+	public String toString() {
 		return status;
 	}
 }

@@ -1,5 +1,7 @@
 package dke.pr.g3.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,25 +26,12 @@ public class MessageRecipient {
 	@ManyToOne
 	private User user;
 	
-	@Enumerated(EnumType.STRING)
-	@Column
-	private Role role;
-	
-	@Column
-	private boolean toAll;
-	
-	@Column
-	private String subject;
-	
 	public MessageRecipient() {
 	}
 
-	public MessageRecipient(Long messageId, User user, Role role, boolean toAll, String subject) {
+	public MessageRecipient(Long messageId, User user) {
 		this.messageId = messageId;
 		this.user = user;
-		this.role = role;
-		this.toAll = toAll;
-		this.subject = subject;
 	}
 	
 	public long getId() {
@@ -67,29 +56,5 @@ public class MessageRecipient {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public boolean isToAll() {
-		return toAll;
-	}
-
-	public void setToAll(boolean toAll) {
-		this.toAll = toAll;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
 	}
 }

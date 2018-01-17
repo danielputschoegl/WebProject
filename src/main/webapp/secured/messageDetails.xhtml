@@ -36,11 +36,14 @@
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<h:form>
+		<f:metadata>
+			<f:viewParam name="id" value="#{messageDetails.id}" />
+		</f:metadata>
 
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 			id="mainNav">
-			<a class="navbar-brand" href="index.xhtml">Dashboard</a>
+			<a class="navbar-brand" href="secured/index.xhtml">Messages</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -121,10 +124,16 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown"
-						href="messages.xhtml"> <i class="fa fa-fw fa-envelope"></i>
+						href="#" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fa fa-fw fa-envelope"></i> <span
+							class="d-lg-none">Messages <span
+								class="badge badge-pill badge-primary">12 New</span>
+						</span> <span class="indicator text-primary d-none d-lg-block"> <i
+								class="fa fa-fw fa-circle"></i>
+						</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
-						data-target="#exampleModal">#{login.getUsername()}</a></li>
+						data-target="#exampleModal">#{loginBean.getUsername()}</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
 						data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout
 					</a></li>
@@ -137,33 +146,67 @@
 			<div class="container-fluid">
 				<!-- Breadcrumbs-->
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item active">Dashboard</li>
+					<li class="breadcrumb-item"><h:link
+							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
+					<li class="breadcrumb-item"><h:link
+							outcome="messages.xhtml?faces-redirect=true" class="text-dark">Messages</h:link></li>
+					<li class="breadcrumb-item active">Message Details</li>
 				</ol>
 			</div>
 
-			<div class="card mb-3">
-				<div class="card-body">
-					<div class="table-responsive">
-
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
-								<tr>
-									<th>Softwarename</th>
-									<th>Softwarekategorie</th>
-									<th>Abteilung</th>
-									<th>Hauptveranwtortlicher</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table>
+			<div class="container-fluid">
+				<div class="card">
+					<div class="card-header">
+						<div class="form-group">
+							<div class="pull-left">
+								<h5 style="margin: 0">Subject:
+									#{messageDetails.getMessage().getSubject()}</h5>
+								Type: #{messageDetails.getMessage().getType().toString()}
+							</div>
+							<div class="pull-right">
+								<h:commandButton id="answer"
+									value="#{messageDetails.isAnswer()}">
+									<f:ajax execute="answer" render="addMessage" />
+								</h:commandButton>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="form-group">
+							<div class="pull-left">
+								<label class="">From:
+									#{messageDetails.getMessage().getCreatedBy().getUsername()}</label>
+							</div>
+							<div class="pull-right">
+								At:
+								<h:outputText class="text-right"
+									value="#{messageDetails.getMessage().getCreatedAt()}">
+									<f:convertDateTime type="date" timeZone="GMT+01:00"
+										pattern="dd.MM.yyyy HH:mm:ss" />
+								</h:outputText>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<h:panelGroup class="card-body">
+						<h:inputText id="addMessage" rendered="#{messageBean.isAnswer()}"
+							class="form-control" style="border: none">
+								value="#{messageDetails.newMessage}"></h:inputText>
+					</h:panelGroup>
+					<div class="card-footer">
+						<div class="pull-left">
+							<label class="">Status:
+								#{messageDetails.getMessage().getStatus().toString()}</label>
+						</div>
+						<div class="pull-right">
+							<label class="">Status by:
+								#{messageDetails.getMessage().getStatusBy().getUsername()}</label>
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
+
+
 		</div>
 
 
