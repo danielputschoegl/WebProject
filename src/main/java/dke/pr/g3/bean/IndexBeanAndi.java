@@ -169,6 +169,12 @@ public class IndexBeanAndi {
 		return out;
 	}
 
+	public boolean addParameter(String name) throws IOException {
+		boolean out = false;
+		out = fl.addParameter(name, "all" + name, name + "[detParamValue(?bc)->?v]:-?v=all" + name + ".");
+		return out;
+	}
+
 	public boolean addParameterValue(String pName, String vName, String[] parents, String[] children) throws Exception {
 		boolean out = false;
 		out = fl.addParameterValue(pName, vName, parents, children);

@@ -1,98 +1,246 @@
-//package dke.pr.g3.gui;
-//
-//import java.io.IOException;
-//import java.util.Arrays;
-//
-//import dke.pr.cli.CBRInterface;
-//
-//public class IndexBean {
-//	public String getData() {
-//		CBRInterface fl;
-//		String out = "";
-//		try {
-//			fl = new CBRInterface("C:/Users/Anderas/Flora-2/flora2/OO/ctxModelAIM.flr",
-//					"C:/Users/Anderas/Flora-2/flora2/OO/bc.flr", "AIMCtx", "SemNOTAMCase");
-//			//			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr", "C:/Users/Uni/Flora-2/CBRM/bc.flr",
-//			//		"AIMCtx", "SemNOTAMCase");
-//
-//			fl.setDebug(false);
-//
-//			out += ("addCtx:     " + fl.addCtx(
-//					"${aircraft_arrival_closure:AIMCtx[Interest->aircraft,FlightPhase->arrival,EventScenario->closure,file->'OO/Contexts/aircraft_arrival_closure.flr']@ctxModel}"));
-//			out += ("Contexts:   " + fl.getCtxs());
-//
-//			out += ("\ndelCtx:     " + fl.delCtx("aircraft_onground_closure"));
-//			out += ("Contexts:   " + fl.getCtxs());
-//
-//			out += ("\nUnusedVal:  " + fl.detUnusedParameterValues());
-//
-//			out += ("\ndelCtx:     " + fl.delCtx("helicopter_allFlightPhases_obstruction"));
-//			out += ("Contexts:   " + fl.getCtxs());
-//
-//			out += ("\naddParam:   " + fl.addParameter("MeteorologicalCondition",
-//					"allMeteorologicalConditions",
-//					"${(MeteorologicalCondition[detParamValue(?bc)->?v]:-?v=allMeteorologicalConditions)@ctxModel}"));
-//			out += ("Params:     " + fl.getParameters());
-//
-//			out += ("\ndelParam:   " + fl.delParameter("MeteorologicalCondition"));
-//			out += ("Params:     " + fl.getParameters());
-//			out += ("Values:     " + fl.getParameterValues());
-//			out += ("CTx Infor:  ");
-//			for (String[] strings : fl.getCtx("aircraft_allFlightPhases_obstruction")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//
-//			out += ("\n\ndelParam:   " + fl.delParameter("FlightPhase"));
-//			out += ("Params:     " + fl.getParameters());
-//			out += ("Values:     " + fl.getParameterValues());
-//			out += ("CTx Infor:  ");
-//			for (String[] strings : fl.getCtx("aircraft_allFlightPhases_obstruction")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//
-//			out += ("\n\naddvalLeaf: " + fl.addParameterValueLeaf("area", "aerodrome"));
-//			out += ("Val Hier:   ");
-//			for (String[] strings : fl.getParameterValuesHiearchy("Interest")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//
-//			out += ("\n\naddValNode: " + fl.addParameterValueNode("aircraft", "specifiedAircraft",
-//					new String[] { "landplane", "seaplane", "helicopter" }));
-//			out += ("Val Hier:   ");
-//			for (String[] strings : fl.getParameterValuesHiearchy("Interest")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//
-//			out += ("\n\naddValRoot: " + fl.addParameterValueRoot("events", "allEventScenarios"));
-//			out += ("Val Hier:   ");
-//			for (String[] strings : fl.getParameterValuesHiearchy("EventScenario")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//
-//			out += ("\n\ndelValTree: " + fl.delParameterValueSubgraph("closure"));
-//			out += ("Val Hier:   ");
-//			for (String[] strings : fl.getParameterValuesHiearchy("EventScenario")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//			out += ("\ndelCtxByVal:" + fl.delCtxByParameterValue());
-//			out += ("Contexts:   " + fl.getCtxs());
-//
-//			out += ("\n\ndelVal:     " + fl.delParameterValue("aircraft"));
-//			out += ("Val Hier:   ");
-//			for (String[] strings : fl.getParameterValuesHiearchy("Interest")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//			out += ("\nupdCtxByVal:" + fl.modifyCtxByParameterValue("aircraft", "landplane"));
-//			out += ("context:    ");
-//			for (String[] strings : fl.getCtx("aircraft_onground_aerodromeEquipment")) {
-//				out += (Arrays.toString(strings) + ", ");
-//			}
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return out;
-//	}
-//}
+package dke.pr.g3.bean;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import dke.pr.cli.CBRInterface;
+
+public class IndexBean {
+	CBRInterface fl;
+
+	public String init() throws IOException {
+		try {
+			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
+					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+
+			fl.setDebug(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "ready";
+	}
+
+	public String getCtxs() throws IOException {
+		String out = "";
+		List<String> contexts = fl.getCtxs();
+		for (String element : contexts) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+
+	public String getCtxHierarchy() throws IOException {
+		String out = "";
+		List<String[]> hierarchy = fl.getCtxHierarchy();
+		for (String[] element : hierarchy) {
+			out += "{source: \"" + element[0] + "\", target: \"" + element[1] + "\", type: \"suit\"},";
+		}
+		return out;
+	}
+
+	public String getParameterValuesHiearchy() throws IOException {
+		String out = "";
+		List<String[]> hierarchy;
+		List<String> parameterValues = fl.getParameters();
+		for (String parameterValue : parameterValues) {
+			// {source: "Oracle", target: "Google", type: "suit"},
+			hierarchy = fl.getParameterValuesHiearchy(parameterValue);
+			for (String[] element : hierarchy) {
+				// {source: "Oracle", target: "Google", type: "suit"},
+				out += "{source: \"" + element[1] + "\", target: \"" + element[0] + "\", type: \"suit\"},";
+				System.out.println("{source: \"" + element[0] + "\", target: \"" + element[1] + "\", type: \"suit\"},");
+				System.out.println();
+			}
+		}
+		return out;
+	}
+
+	public boolean delParameter(String pName) throws IOException {
+		boolean out = false;
+		out = fl.delParameter(pName);
+		return out;
+	}
+
+	public boolean delCtx(String ctx, boolean fileAlso) throws Exception {
+		boolean out = false;
+		out = fl.delCtx(ctx, fileAlso);
+		return out;
+	}
+
+	public String getCtxFile(String ctx) throws Exception {
+		String out = "";
+		out = fl.getCtxFile(ctx);
+		return out;
+	}
+
+	public String getCtxInfo(String ctx) throws IOException {
+		String out = "";
+		List<String[]> contextsInfo = fl.getCtxInfo(ctx);
+		for (String[] element : contextsInfo) {
+			out += " " + element[0] + " unter " + element[1] + "\n";
+		}
+		return out;
+	}
+
+	public String getParameters() throws IOException {
+		String out = "";
+		List<String> parameters = fl.getParameters();
+		for (String element : parameters) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+
+	public boolean restart() throws IOException {
+		boolean out = false;
+		out = fl.restart();
+		return out;
+	}
+
+	public boolean updateDetParamValue(String param, String def) throws IOException {
+		boolean out = false;
+		out = fl.updateDetParamValue(param, def);
+		return out;
+	}
+
+	public String getParameterValues() throws IOException {
+		String out = "";
+		List<String> parameterValues = fl.getParameterValues();
+		for (String element : parameterValues) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+
+	public String getParameterParameterValues(String param) throws IOException {
+		String out = "";
+		List<String> parameterParameterValues = fl.getParameterParameterValues(param);
+		for (String element : parameterParameterValues) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+
+	public String getParameterValuesHiearchy(String parameter) throws IOException {
+		String out = "";
+		List<String[]> parameterValuesHiearchy = fl.getParameterValuesHiearchy(parameter);
+		for (String[] element : parameterValuesHiearchy) {
+			out += " " + element[0] + " unter " + element[1] + "\n";
+		}
+		return out;
+	}
+
+	public String getDetParamValue(String param) throws IOException {
+		String out = "";
+		List<String> detParamValue = fl.getDetParamValue(param);
+		for (String element : detParamValue) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+
+	public String getInterestSpecClass() throws IOException {
+		String out = "";
+		List<String[]> interestSpecClass = fl.getInterestSpecClass();
+		for (String[] element : interestSpecClass) {
+			out += " " + element[0] + " unter " + element[1] + "\n";
+		}
+		return out;
+	}
+
+	public String getNOTAMS() throws IOException {
+		String out = "";
+		List<String> NOTAMS = fl.getNOTAMS();
+		for (String element : NOTAMS) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+
+	public boolean addParameter(String pName, String rootValue, String detParamDef) throws IOException {
+		boolean out = false;
+		out = fl.addParameter(pName, rootValue, detParamDef);
+		return out;
+	}
+
+	public boolean addParameterValue(String pName, String vName, String[] parents, String[] children) throws Exception {
+		boolean out = false;
+		out = fl.addParameterValue(pName, vName, parents, children);
+		return out;
+	}
+
+	public boolean delParameterValue(String vName) throws IOException {
+		boolean out = false;
+		out = fl.delParameterValue(vName);
+		return out;
+	}
+
+	public boolean addCtx(String ctxDef, String fCtx) throws IOException {
+		boolean out = false;
+		out = fl.addCtx(ctxDef, fCtx);
+		return out;
+	}
+
+	public String getRules(String ctx) throws Exception {
+		String out = "";
+		HashMap<String, String> selects = fl.getRules(ctx);
+		for (Entry<String, String> entry : selects.entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			out += key + " " + value;
+		}
+		return out;
+	}
+
+	public String getRules() throws Exception {
+		String out = "";
+		HashMap<String, String> rules;
+		List<String> ctxs = fl.getCtxs();
+		for (String ctx : ctxs) {
+			rules = fl.getRules(ctx);
+			for (Entry<String, String> entry : rules.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				out += key + " " + value;
+			}
+		}
+		return out;
+	}
+
+	public ArrayList<String> getRulesAsArrayList() throws Exception {
+		ArrayList<String> out = new ArrayList<String>();
+		HashMap<String, String> rules;
+		List<String> ctxs = fl.getCtxs();
+		for (String ctx : ctxs) {
+			rules = fl.getRules(ctx);
+			for (Entry<String, String> entry : rules.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				out.add(key + " " + value);
+			}
+		}
+		return out;
+	}
+
+	public boolean delRule(String ctx, String ruleID) throws Exception {
+		boolean out = false;
+		out = fl.delRule(ctx, ruleID);
+		return out;
+	}
+
+	public String getISpecs() throws IOException {
+		String out = "";
+		List<String> iSpecs = fl.getISpecs();
+		for (String element : iSpecs) {
+			out += " " + element + "\n";
+		}
+		return out;
+	}
+}

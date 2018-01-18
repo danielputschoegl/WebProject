@@ -6,14 +6,16 @@
 		IndexBeanAndi bean = new IndexBeanAndi();
 	%>
 	<%=bean.init()%>
-	<br> 
-	<br> Contexts:
-	<%=bean.getCtxs()%>
+	<br> vielleicht modify parameter, weil einheitlich
+	<br> Parameters:
+	<%=bean.getParameters()%>
 	<br>
-	<br> 
-	<%//= bean.getCtxFile(ctx) %>
+	<br> ParamterValues
+	<%=bean.getParameterValues()%>
 	<br>
-	<br> Enter new Context Value:
+	
+	<br>
+	<br> Enter new Parameter Value:
 	<input type="text" name="name" />
 	<%
 		//bean.updateDetParamValue(param, def);
