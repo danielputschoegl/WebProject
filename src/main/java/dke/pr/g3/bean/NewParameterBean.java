@@ -5,13 +5,13 @@ import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import dke.pr.g3.bean.*;
 
-@ManagedBean(name = "NewParameter", eager = true)
-@SessionScoped
-
+@ManagedBean(name = "newParameter", eager = true)
+@ViewScoped
 public class NewParameterBean {
 	IndexBeanAndi bean = new IndexBeanAndi();
 	private String parametername;
@@ -24,7 +24,7 @@ public class NewParameterBean {
 		//session.setAttribute("parametername", parametername);
 		bean.init();
 		bean.addParameter(parametername, "all" + parametername, parametername + "[detParamValue(?bc)->?v]:-?v=all" + parametername + ".");
-		return "secured/index?faces-redirect=true";
+		return "index?faces-redirect=true";
 	}
 
 	public String getParametername() {

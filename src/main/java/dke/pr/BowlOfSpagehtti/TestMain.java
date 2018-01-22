@@ -22,6 +22,7 @@ public class TestMain {
 		System.out.println(abc.getCtxInfo("landplane_onground_runwayClosure"));
 		System.out.println();
 		System.out.println(abc.getParameters());
+		System.out.println(abc.getParametersAsList());
 		System.out.println();
 		System.out.println(abc.getParameterValues());
 		System.out.println();
@@ -54,7 +55,11 @@ public class TestMain {
 		System.out.println(abc.getISpecs());
 		System.out.println(abc.getISpecs());
 		System.out.println(abc.getNOTAMS());
-
+		// System.out.println(abc.addParameter("Katze"));
+//		EventscenariotortespecialPortheliport
+//		System.out.println(abc.addParameterValue("Ente", "uniTeichEnte", new String[] { "allEnte" }, null));
+		System.out.println(abc.addParameterValue("EventScenario", "torte", new String[] { "specialPort" }, new String[] { "heliport" }));
+		
 		// System.out.println(abc.addParameter("Auto", "allAuto",
 		// "Auto[detParamValue(?bc)->?v]:-?v=allAuto."));
 		// neustart oder so

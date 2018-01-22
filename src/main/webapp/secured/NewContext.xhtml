@@ -20,16 +20,26 @@
 	<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="resources/css/styles.css" />
 
-	<title>Create new Parameter</title>
+	<title>Create new Context</title>
 </h:head>
 <h:body>
-	<h2>Choose a name for the Parameter</h2>
+	<h2>Choose a name for the Context</h2>
+
 	<h:form>
+		<select>
+			
+			<ui:repeat value="#{newContext.parameters}" var="parameter">
+				<option>#{parameter}</option>
+			</ui:repeat>
+		</select>
+		<br></br>
+		<br></br>
 		<div class="form-group">
-			<label for="exampleInputEmail1">Parametername</label>
-			<h:inputText class="form-control" id="parametername"
-				value="#{newParameter.parametername}" placeholder="Parametername"></h:inputText>
+			<label for="newContextNameLabel">Contextname</label>
+			<h:inputText class="form-control" id="contextname"
+				value="#{newParameter.parametername}" placeholder="contextname"></h:inputText>
 		</div>
+		<br></br>
 		<h:commandButton class="btn btn-primary btn-block"
 			action="#{newParameter.create}" value="newParameter"></h:commandButton>
 	</h:form>

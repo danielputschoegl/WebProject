@@ -97,6 +97,19 @@ public class IndexBeanAndi {
 		return out;
 	}
 
+	public List<String> getParametersAsList() {
+
+		List<String> parameters = null;
+		try {
+			parameters = fl.getParameters();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return parameters;
+	}
+
 	public boolean restart() throws IOException {
 		boolean out = false;
 		out = fl.restart();
