@@ -15,10 +15,10 @@ public class TestMain {
 		System.out.println(abc.getCtxs());
 		System.out.println();
 		System.out.println(abc.getCtxHierarchy());
-		System.out.println();
-		// System.out.println(abc.getCtxFile("landplane_onground_runwayClosure"));
+		System.out.println("ContextFile:");
+		 System.out.println(abc.getCtxFile("landplane_onground_runwayClosure"));
 		// System.out.println(abc.getCtxFile("vogel"));
-		System.out.println();
+		System.out.println("Context Info: ");
 		System.out.println(abc.getCtxInfo("landplane_onground_runwayClosure"));
 		System.out.println();
 		System.out.println(abc.getParameters());
@@ -58,8 +58,7 @@ public class TestMain {
 		// System.out.println(abc.addParameter("Katze"));
 //		EventscenariotortespecialPortheliport
 //		System.out.println(abc.addParameterValue("Ente", "uniTeichEnte", new String[] { "allEnte" }, null));
-		System.out.println(abc.addParameterValue("EventScenario", "torte", new String[] { "specialPort" }, new String[] { "heliport" }));
-		
+//		System.out.println(abc.addParameterValue("EventScenario", "torte", new String[] { "specialPort" }, new String[] { "heliport" }));
 		// System.out.println(abc.addParameter("Auto", "allAuto",
 		// "Auto[detParamValue(?bc)->?v]:-?v=allAuto."));
 		// neustart oder so

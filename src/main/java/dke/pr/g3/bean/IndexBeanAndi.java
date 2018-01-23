@@ -99,7 +99,17 @@ public class IndexBeanAndi {
 
 	public List<String> getParametersAsList() {
 
+		try {
+			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
+					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		fl.setDebug(false);
 		List<String> parameters = null;
+		
 		try {
 			parameters = fl.getParameters();
 		} catch (IOException e) {

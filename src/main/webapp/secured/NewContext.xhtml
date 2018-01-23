@@ -27,7 +27,7 @@
 
 	<h:form>
 		<select>
-			
+
 			<ui:repeat value="#{newContext.parameters}" var="parameter">
 				<option>#{parameter}</option>
 			</ui:repeat>
@@ -35,13 +35,18 @@
 		<br></br>
 		<br></br>
 		<div class="form-group">
-			<label for="newContextNameLabel">Contextname</label>
+			<label for="newContextNameLabel">Contextname: </label>
 			<h:inputText class="form-control" id="contextname"
-				value="#{newParameter.parametername}" placeholder="contextname"></h:inputText>
+				value="#{newContext.contextname}" placeholder="contextname"></h:inputText>
+			<br></br> <label for="newContextLabel">Context: </label>
+			<h:inputText class="form-control" id="context"
+				value="#{newContext.context}" placeholder="context"></h:inputText>
 		</div>
 		<br></br>
+
+		
 		<h:commandButton class="btn btn-primary btn-block"
-			action="#{newParameter.create}" value="newParameter"></h:commandButton>
+			action="#{newContext.create}" value="newContext"></h:commandButton>
 	</h:form>
 </h:body>
 </html>

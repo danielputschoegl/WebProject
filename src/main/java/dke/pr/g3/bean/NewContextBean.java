@@ -1,21 +1,29 @@
 package dke.pr.g3.bean;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "newContext", eager = true)
 @ViewScoped
 public class NewContextBean {
-	IndexBeanAndi bean = new IndexBeanAndi();
+	static IndexBeanAndi bean = new IndexBeanAndi();
 	// List<String> parameters = bean.getParametersAsList();
-	List<String> parameters = new LinkedList<>();
+	static List<String> parameters = bean.getParametersAsList();
+	// static List<String> parameterValues =
+	// bean.getParameterParameterValuesAsList();
 
 	private String contextname;
+	private String context;
+
+	// @PostConstruct
+	// public void fillParameters() {
+	// parameters = bean.getParametersAsList();
+	// }
 
 	public String create() throws IOException {
 
@@ -40,4 +48,13 @@ public class NewContextBean {
 	public List<String> getParameters() {
 		return parameters;
 	}
+
+	public String getContext() {
+		return context;
+	}
+
+	public void setContext(String context) {
+		this.context = context;
+	}
+	
 }
