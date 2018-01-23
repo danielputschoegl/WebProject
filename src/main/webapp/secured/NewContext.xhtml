@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Project for Uni course DKE PR" />
+	<meta name="keywords" content="..." />
+	<meta name="author"
+		content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet" href="resources/css/sb-admin.css" />
+	<link rel="stylesheet" href="resources/css/sb-admin.min.css" />
+	<link rel="stylesheet" href="resources/css/font-awesome.css" />
+	<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="resources/css/dataTables.bootstrap4.css" />
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="resources/css/styles.css" />
+
+	<title>Create new Context</title>
+</h:head>
+<h:body>
+	<h2>Choose a name for the Context</h2>
+
+	<h:form>
+		<select>
+
+			<ui:repeat value="#{newContext.parameters}" var="parameter">
+				<option>#{parameter}</option>
+			</ui:repeat>
+		</select>
+		<br></br>
+		<br></br>
+		<div class="form-group">
+			<label for="newContextNameLabel">Contextname: </label>
+			<h:inputText class="form-control" id="contextname"
+				value="#{newContext.contextname}" placeholder="contextname"></h:inputText>
+			<br></br> <label for="newContextLabel">Context: </label>
+			<h:inputText class="form-control" id="context"
+				value="#{newContext.context}" placeholder="context"></h:inputText>
+		</div>
+		<br></br>
+
+		
+		<h:commandButton class="btn btn-primary btn-block"
+			action="#{newContext.create}" value="newContext"></h:commandButton>
+	</h:form>
+</h:body>
+</html>

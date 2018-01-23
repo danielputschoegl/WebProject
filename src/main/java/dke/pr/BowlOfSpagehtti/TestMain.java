@@ -3,25 +3,26 @@ package dke.pr.BowlOfSpagehtti;
 import java.util.ArrayList;
 
 import dke.pr.cli.CBRInterface;
-import dke.pr.g3.bean.IndexBeanAndi;
+import dke.pr.cli.Flora2Interface;
 
 public class TestMain {
 	static CBRInterface fl;
 	static String out;
 
 	public static void main(String[] args) throws Exception {
-		IndexBeanAndi abc = new IndexBeanAndi();
+		Flora2Interface abc = new Flora2Interface();
 		abc.init();
 		System.out.println(abc.getCtxs());
 		System.out.println();
 		System.out.println(abc.getCtxHierarchy());
-		System.out.println();
-		// System.out.println(abc.getCtxFile("landplane_onground_runwayClosure"));
+		System.out.println("ContextFile:");
+		 System.out.println(abc.getCtxFile("landplane_onground_runwayClosure"));
 		// System.out.println(abc.getCtxFile("vogel"));
-		System.out.println();
+		System.out.println("Context Info: ");
 		System.out.println(abc.getCtxInfo("landplane_onground_runwayClosure"));
 		System.out.println();
 		System.out.println(abc.getParameters());
+		System.out.println(abc.getParametersAsList());
 		System.out.println();
 		System.out.println(abc.getParameterValues());
 		System.out.println();
@@ -54,7 +55,10 @@ public class TestMain {
 		System.out.println(abc.getISpecs());
 		System.out.println(abc.getISpecs());
 		System.out.println(abc.getNOTAMS());
-
+		// System.out.println(abc.addParameter("Katze"));
+//		EventscenariotortespecialPortheliport
+//		System.out.println(abc.addParameterValue("Ente", "uniTeichEnte", new String[] { "allEnte" }, null));
+//		System.out.println(abc.addParameterValue("EventScenario", "torte", new String[] { "specialPort" }, new String[] { "heliport" }));
 		// System.out.println(abc.addParameter("Auto", "allAuto",
 		// "Auto[detParamValue(?bc)->?v]:-?v=allAuto."));
 		// neustart oder so

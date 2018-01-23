@@ -1,17 +1,9 @@
 package dke.pr.g3;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.TypedQuery;
-
-import org.hibernate.*;
-
 import dke.pr.g3.db.DBConnection;
-import dke.pr.g3.db.HibernateUtil;
-import dke.pr.g3.entities.Message;
-import dke.pr.g3.entities.MessageRecipient;
 import dke.pr.g3.entities.User;
 import dke.pr.g3.model.Role;
 import dke.pr.g3.model.Status;

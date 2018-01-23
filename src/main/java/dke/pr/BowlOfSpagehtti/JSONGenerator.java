@@ -1,7 +1,7 @@
 package dke.pr.BowlOfSpagehtti;
 
 import dke.pr.cli.CBRInterface;
-import dke.pr.g3.bean.IndexBeanAndi;
+import dke.pr.cli.Flora2Interface;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,16 +17,18 @@ public class JSONGenerator {
 
 	CBRInterface fl;
 
-	public String getJSON() throws IOException, JSONException {
-		String out = "";
-		// {source: "Microsoft", target: "Amazon", type: "licensing"},
-		// {source: "Nokia", target: "Apple", type: "resolved"},
-		// {source: "Oracle", target: "Google", type: "suit"},
-		IndexBeanAndi abc = new IndexBeanAndi();
-		abc.init();
-		out = abc.getCtxHierarchy();
-
-		return out;
+	public static String getJSON() throws IOException, JSONException {
+		return "test";
+//		
+//		String out = "";
+//		// {source: "Microsoft", target: "Amazon", type: "licensing"},
+//		// {source: "Nokia", target: "Apple", type: "resolved"},
+//		// {source: "Oracle", target: "Google", type: "suit"},
+//		Flora2Interface abc = new Flora2Interface();
+//		abc.init();
+//		out = abc.getCtxHierarchy();
+//
+//		return out;
 	}
 
 	public String getParameterAsJSON() throws IOException, JSONException {
@@ -34,7 +36,7 @@ public class JSONGenerator {
 		// {source: "Microsoft", target: "Amazon", type: "licensing"},
 		// {source: "Nokia", target: "Apple", type: "resolved"},
 		// {source: "Oracle", target: "Google", type: "suit"},
-		IndexBeanAndi abc = new IndexBeanAndi();
+		Flora2Interface abc = new Flora2Interface();
 		abc.init();
 		out = abc.getParameterValuesHiearchy();
 

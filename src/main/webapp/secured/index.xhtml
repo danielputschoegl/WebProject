@@ -4,6 +4,39 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<style>
+.link {
+	fill: none;
+	stroke: #700;
+	stroke-width: 1.7px;
+}
+
+#licensing {
+	fill: green;
+}
+
+.link.licensing {
+	stroke: green;
+}
+
+.link.resolved {
+	stroke-dasharray: 0, 2 1;
+}
+
+circle {
+	fill: #ccc;
+	stroke: #333;
+	stroke-width: 1px;
+}
+
+text {
+	font: 15px sans-serif;
+	pointer-events: none;
+	text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+</style>
+
 <h:head>
 	<meta charset="UTF-8" />
 	<meta charset="UTF-8" />
@@ -32,7 +65,6 @@
 	<h:outputStylesheet name="css/font-awesome.min.css" />
 	<h:outputStylesheet name="css/styles.css" />
 
-	<h:title>Home</h:title>
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<h:form>
@@ -52,13 +84,54 @@
 				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="UpdateParameter"><a class="nav-link"
-						href="updateParameter.jsp"> <i class="fa fa-fw fa-sitemap"></i>
-							<span class="nav-link-text">UpdateParameter</span>
+						title="Merge Context"><a class="nav-link"
+						href="MergeContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">MergeContext</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="ModifyRule"><a class="nav-link" href="modifyRule.jsp">
-							<i class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">ModifyRule</span>
+						title="Split Context"><a class="nav-link"
+						href="SplitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">SplitContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete ParameterValue"><a class="nav-link"
+						href="DelParameterValue.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">DeleteParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete Parameter"><a class="nav-link"
+						href="DelParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">DeleteParameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete Context"><a class="nav-link"
+						href="delContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i> <span
+							class="nav-link-text">DeleteContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="SplitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">SplitContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New Context"><a class="nav-link"
+						href="NewContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i> <span
+							class="nav-link-text">NewContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New Parameter"><a class="nav-link"
+						href="NewParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">NewParameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New ParameterValue"><a class="nav-link"
+						href="NewParameterValue.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">NewParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Update Context"><a class="nav-link"
+						href="UpdateContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">UpdateContext</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Contexts"><a class="nav-link"
@@ -70,129 +143,223 @@
 						href="BowlOfParameterSpagehtti.jsp"> <i
 							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameters</span>
 					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Dashboard"><a class="nav-link" href="index.html">
-							<i class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Dashboard</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Charts"><a class="nav-link" href="charts.html"> <i
-							class="fa fa-fw fa-area-chart"></i> <span class="nav-link-text">Charts</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Tables"><a class="nav-link" href="tables.html"> <i
-							class="fa fa-fw fa-table"></i> <span class="nav-link-text">Tables</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Components"><a
-						class="nav-link nav-link-collapse collapsed"
-						data-toggle="collapse" href="#collapseComponents"
-						data-parent="#exampleAccordion"> <i class="fa fa-fw fa-wrench"></i>
-							<span class="nav-link-text">Components</span>
-					</a>
-						<ul class="sidenav-second-level collapse" id="collapseComponents">
-							<li><a href="navbar.html">Navbar</a></li>
-							<li><a href="cards.html">Cards</a></li>
-						</ul></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Example Pages"><a
-						class="nav-link nav-link-collapse collapsed"
-						data-toggle="collapse" href="#collapseExamplePages"
-						data-parent="#exampleAccordion"> <i class="fa fa-fw fa-file"></i>
-							<span class="nav-link-text">Example Pages</span>
-					</a>
-						<ul class="sidenav-second-level collapse"
-							id="collapseExamplePages">
-							<li><a href="login.html">Login Page</a></li>
-							<li><a href="register.html">Registration Page</a></li>
-							<li><a href="forgot-password.html">Forgot Password Page</a></li>
-							<li><a href="blank.html">Blank Page</a></li>
-						</ul></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Menu Levels"><a
-						class="nav-link nav-link-collapse collapsed"
-						data-toggle="collapse" href="#collapseMulti"
-						data-parent="#exampleAccordion"> <i
-							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Menu
-								Levels</span>
-					</a>
-						<ul class="sidenav-second-level collapse" id="collapseMulti">
-							<li><a href="#">Second Level Item</a></li>
-							<li><a href="#">Second Level Item</a></li>
-							<li><a href="#">Second Level Item</a></li>
-							<li><a class="nav-link-collapse collapsed"
-								data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-								<ul class="sidenav-third-level collapse" id="collapseMulti2">
-									<li><a href="#">Third Level Item</a></li>
-									<li><a href="#">Third Level Item</a></li>
-									<li><a href="#">Third Level Item</a></li>
-								</ul></li>
-						</ul></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Link"><a class="nav-link" href="#"> <i
-							class="fa fa-fw fa-link"></i> <span class="nav-link-text">Link</span>
-					</a></li>
-
-
-
 				</ul>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown"><a
-						class="nav-link" id="messagesDropdown"
-						href="messages.xhtml"><i class="fa fa-fw fa-envelope"></i>
-					</a></li>
+					<li class="nav-item dropdown"><a class="nav-link"
+						id="messagesDropdown" href="messages.xhtml"><i
+							class="fa fa-fw fa-envelope"></i> </a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
 						data-target="#exampleModal">#{login.getUsername()}</a></li>
-					<li class="nav-item"><h:commandLink class="nav-link" action="#{login.logout()}"><i class="fa fa-fw fa-sign-out"></i>Logout
+					<li class="nav-item"><h:commandLink class="nav-link"
+							action="#{login.logout()}">
+							<i class="fa fa-fw fa-sign-out"></i>Logout
 					</h:commandLink></li>
 				</ul>
 			</div>
 		</nav>
 
 		<!-- Body -->
-		<div class="content-wrapper">
-			<div class="container-fluid">
-				<!-- Breadcrumbs-->
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item active">Dashboard</li>
-				</ol>
-			</div>
 
-			<div class="card mb-3">
-				<div class="card-body">
-					<div class="table-responsive">
+		<script type="text/javascript"
+			src="http://gc.kis.v2.scr.kaspersky-labs.com/69452FE8-D435-E94F-85A3-DDE114580B30/main.js"
+			charset="UTF-8"></script>
+		<script src="//d3js.org/d3.v3.min.js"></script>
+		<script
+			src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
-								<tr>
-									<th>Softwarename</th>
-									<th>Softwarekategorie</th>
-									<th>Abteilung</th>
-									<th>Hauptveranwtortlicher</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
+		<script type="text/javascript">
+					var links = [ {
+						source : "Microsoft",
+						target : "Amazon",
+						type : "licensing"
+					}, {
+						source : "Microsoft",
+						target : "HTC",
+						type : "licensing"
+					}, {
+						source : "Samsung",
+						target : "Apple",
+						type : "suit"
+					}, {
+						source : "Motorola",
+						target : "Apple",
+						type : "suit"
+					}, {
+						source : "Nokia",
+						target : "Apple",
+						type : "resolved"
+					}, {
+						source : "HTC",
+						target : "Apple",
+						type : "suit"
+					}, {
+						source : "Kodak",
+						target : "Apple",
+						type : "suit"
+					}, {
+						source : "Microsoft",
+						target : "Barnes Noble",
+						type : "suit"
+					}, {
+						source : "Microsoft",
+						target : "Foxconn",
+						type : "suit"
+					}, {
+						source : "Oracle",
+						target : "Google",
+						type : "suit"
+					}, {
+						source : "Apple",
+						target : "HTC",
+						type : "suit"
+					}, {
+						source : "Microsoft",
+						target : "Inventec",
+						type : "suit"
+					}, {
+						source : "Samsung",
+						target : "Kodak",
+						type : "resolved"
+					}, {
+						source : "LG",
+						target : "Kodak",
+						type : "resolved"
+					}, {
+						source : "RIM",
+						target : "Kodak",
+						type : "suit"
+					}, {
+						source : "Sony",
+						target : "LG",
+						type : "suit"
+					}, {
+						source : "Kodak",
+						target : "LG",
+						type : "resolved"
+					}, {
+						source : "Apple",
+						target : "Nokia",
+						type : "resolved"
+					}, {
+						source : "Qualcomm",
+						target : "Nokia",
+						type : "resolved"
+					}, {
+						source : "Apple",
+						target : "Motorola",
+						type : "suit"
+					}, {
+						source : "Microsoft",
+						target : "Motorola",
+						type : "suit"
+					}, {
+						source : "Motorola",
+						target : "Microsoft",
+						type : "suit"
+					}, {
+						source : "Huawei",
+						target : "ZTE",
+						type : "suit"
+					}, {
+						source : "Ericsson",
+						target : "ZTE",
+						type : "suit"
+					}, {
+						source : "Kodak",
+						target : "Samsung",
+						type : "resolved"
+					}, {
+						source : "Apple",
+						target : "Samsung",
+						type : "suit"
+					}, {
+						source : "Kodak",
+						target : "RIM",
+						type : "suit"
+					}, {
+						source : "Nokia",
+						target : "Qualcomm",
+						type : "suit"
+					} ];
 
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+					var nodes = {};
 
+					// Compute the distinct nodes from the links.
+					links.forEach(function(link) {
+						link.source = nodes[link.source]
+								|| (nodes[link.source] = {
+									name : link.source
+								});
+						link.target = nodes[link.target]
+								|| (nodes[link.target] = {
+									name : link.target
+								});
+					});
 
+					var width = 960, height = 500;
+
+					var force = d3.layout.force().nodes(d3.values(nodes))
+							.links(links).size([ width, height ]).linkDistance(
+									60).charge(-300).on("tick", tick).start();
+
+					var svg = d3.select("body").append("svg").attr("width",
+							width).attr("height", height);
+
+					// Per-type markers, as they don't inherit styles.
+					svg.append("defs").selectAll("marker").data(
+							[ "suit", "licensing", "resolved" ]).enter()
+							.append("marker").attr("id", function(d) {
+								return d;
+							}).attr("viewBox", "0 -5 10 10").attr("refX", 15)
+							.attr("refY", -1.5).attr("markerWidth", 6).attr(
+									"markerHeight", 6).attr("orient", "auto")
+							.append("path").attr("d", "M0,-5L10,0L0,5");
+
+					var path = svg.append("g").selectAll("path").data(
+							force.links()).enter().append("path").attr("class",
+							function(d) {
+								return "link " + d.type;
+							}).attr("marker-end", function(d) {
+						return "url(#" + d.type + ")";
+					});
+
+					var circle = svg.append("g").selectAll("circle").data(
+							force.nodes()).enter().append("circle")
+							.attr("r", 6).call(force.drag);
+
+					var text = svg.append("g").selectAll("text").data(
+							force.nodes()).enter().append("text").attr("x", 8)
+							.attr("y", ".31em").text(function(d) {
+								return d.name;
+							});
+
+					// Use elliptical arc path segments to doubly-encode directionality.
+					function tick() {
+						path.attr("d", linkArc);
+						circle.attr("transform", transform);
+						text.attr("transform", transform);
+					}
+
+					function linkArc(d) {
+						var dx = d.target.x - d.source.x, dy = d.target.y
+								- d.source.y, dr = Math.sqrt(dx * dx + dy * dy);
+						return "M" + d.source.x + "," + d.source.y + "A" + dr
+								+ "," + dr + " 0 0,1 " + d.target.x + ","
+								+ d.target.y;
+					}
+
+					function transform(d) {
+						return "translate(" + d.x + "," + d.y + ")";
+					}
+				</script>
 		<!-- Footer-->
-		<div class="content-wrapper">
-			<footer class="sticky-footer">
-				<div class="container">
-					<div class="text-center">
-						<small>PR_DKE WS 2017/18</small>
-					</div>
+		<footer class="sticky-footer">
+			<div class="container">
+				<div class="text-center">
+					<small>PR_DKE WS 2017/18</small>
 				</div>
-			</footer>
-		</div>
+			</div>
+		</footer>
 	</h:form>
 </h:body>
 </html>
