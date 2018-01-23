@@ -34,6 +34,10 @@
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<h:form>
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{editMessage.init(parameterPassing.getMessageId())}" />
+		</f:metadata>
 
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
@@ -88,102 +92,76 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><h:link
 							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
-					<li class="breadcrumb-item active">Messages</li>
+					<li class="breadcrumb-item"><h:link
+							outcome="messages.xhtml?faces-redirect=true" class="text-dark">Messages</h:link></li>
+					<li class="breadcrumb-item active">Message Details</li>
 				</ol>
 			</div>
-
-
-
-			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fa fa-envelope"></i> Inbox
-				</div>
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
-								<tr class="bg-light">
-									<th>From</th>
-									<th>Subject</th>
-									<th>Date</th>
-									<th>Type</th>
-									<th>Status</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr class="bg-light">
-									<th>From</th>
-									<th>Subject</th>
-									<th>Date</th>
-									<th>Type</th>
-									<th>Status</th>
-									<th></th>
-								</tr>
-							</tfoot>
-							<tbody>
-								<c:forEach var="msg"
-									items="#{message.getMessages(login.getUser())}">
-									<tr>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{parameterPassing.goToMessageDetails()}"
-												class="text-dark">
-												<f:param name="messageId" value="#{msg.getId()}" />
-            									#{msg.getCreatedBy().getUsername()}
-        									</h:commandLink></th>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{parameterPassing.goToMessageDetails()}"
-												class="text-dark">
-												<f:param name="messageId" value="#{msg.getId()}" />
-            									#{msg.getSubject()}
-        									</h:commandLink></th>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{parameterPassing.goToMessageDetails()}"
-												class="text-dark">
-												<f:param name="messageId" value="#{msg.getId()}" />
-												<h:outputText value="#{msg.getCreatedAt()}">
-													<f:convertDateTime type="date" timeZone="GMT+01:00"
-														pattern="HH:mm:ss dd.MM.yyyy" />
-												</h:outputText>
-											</h:commandLink></th>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{parameterPassing.goToMessageDetails()}"
-												class="text-dark">
-												<f:param name="messageId" value="#{msg.getId()}" />
-												#{msg.getType().toString()}
-											</h:commandLink></th>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{parameterPassing.goToMessageDetails()}"
-												class="text-dark">
-												<f:param name="messageId" value="#{msg.getId()}" />
-												#{msg.getStatus().toString()}
-											</h:commandLink></th>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{message.deleteMessage(login.getUser(), msg.getId())}"
-												class="text-dark">
-												<i class="fa fa-fw fa-trash"></i>
-											</h:commandLink></th>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+			<div class="container-fluid">
+				<div class="card">
+					<div class="card-header">
+						<div class="form-group">
+							<div class="pull-left">
+								<h5 style="margin: 0">Subject:
+									#{editMessage.getMessage().getSubject()}</h5>
+								Type: #{editMessage.getMessage().getType().toString()}
+							</div>
+							<div class="pull-right"></div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="pull-left">
+							<label class="">From:
+								#{editMessage.getMessage().getCreatedBy().getUsername()}</label>
+						</div>
+						<div class="pull-right">
+							At:
+							<h:outputText class="text-right"
+								value="#{editMessage.getMessage().getCreatedAt()}">
+								<f:convertDateTime type="date" timeZone="GMT+01:00"
+									pattern="HH:mm:ss dd.MM.yyyy" />
+							</h:outputText>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<br />
+					<h:inputTextarea class="form-control" id="text"
+						style="border: 0; box-shadow: none;" value="#{editMessage.text}"></h:inputTextarea>
+					<div class="container-fluid">
+						<hr />
+						#{editMessage.getMessage().getMessage()}
+					</div>
+					<br />
+					<div class="card-footer">
+						<div class="pull-left">
+							<label for="status">Status: </label>
+							<h:selectOneMenu id="status" class="btn-light dropdown-toggle"
+								value="#{editMessage.status}">
+								<f:selectItems value="#{editMessage.statuses}" var="status" />
+							</h:selectOneMenu>
+						</div>
+						<div class="pull-right">
+							<label class="">Status by:
+								#{editMessage.getMessage().getStatusBy().getUsername()}</label>
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				<div class="card-footer small text-muted">Last Update:
-					#{currentDate}</div>
 			</div>
-		</div>
 
+			<div class="container-fluid" style="text-align: right; margin-bottom: 3%; margin-top: 1%;">
+				<h:commandButton class="btn btn-primary"
+					action="#{editMessage.save(login.getUser())}" value="save"></h:commandButton>
+			</div>
 
-		<!-- Footer-->
-		<footer class="sticky-footer">
-			<div class="container">
-				<div class="text-center">
-					<small>PR_DKE WS 2017/18</small>
+			<!-- Footer-->
+			<footer class="sticky-footer">
+				<div class="container">
+					<div class="text-center">
+						<small>PR_DKE WS 2017/18</small>
+					</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
 	</h:form>
 </h:body>
 </html>

@@ -31,19 +31,18 @@
 	<h:outputStylesheet name="css/font-awesome.css" />
 	<h:outputStylesheet name="css/font-awesome.min.css" />
 	<h:outputStylesheet name="css/styles.css" />
-
-	<h:title>Home</h:title>
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<h:form>
 		<f:metadata>
-			<f:viewParam name="id" value="#{messageDetails.id}" />
+			<f:event type="preRenderView"
+				listener="#{messageDetails.init(parameterPassing.getMessageId())}" />
 		</f:metadata>
 
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 			id="mainNav">
-			<a class="navbar-brand" href="secured/index.xhtml">Messages</a>
+			<a class="navbar-brand" href="messages.xhtml">Messages</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -54,89 +53,34 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
 
-
-
+					<li class="nav-item container-fluid" data-toggle="tooltip"
+						data-placement="right" title="Dashboard">
+						<div class="container-fluid">
+							<h:button class="btn btn-primary btn-block"
+								outcome="newMessage?faces-redirect=true" value="New Message" />
+						</div>
+					</li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Dashboard"><a class="nav-link" href="index.html">
-							<i class="fa fa-fw fa-dashboard"></i> <span class="nav-link-text">Dashboard</span>
+						title="Dashboard"><a class="nav-link" href="messages.xhtml">
+							<i class="fa fa-fw fa-inbox"></i> <span class="nav-link-text">Inbox</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Charts"><a class="nav-link" href="charts.html"> <i
-							class="fa fa-fw fa-area-chart"></i> <span class="nav-link-text">Charts</span>
+						title="Dashboard"><a class="nav-link"
+						href="sentMessages.xhtml"> <i class="fa fa-fw fa-share"></i> <span
+							class="nav-link-text">Sent</span>
 					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Tables"><a class="nav-link" href="tables.html"> <i
-							class="fa fa-fw fa-table"></i> <span class="nav-link-text">Tables</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Components"><a
-						class="nav-link nav-link-collapse collapsed"
-						data-toggle="collapse" href="#collapseComponents"
-						data-parent="#exampleAccordion"> <i class="fa fa-fw fa-wrench"></i>
-							<span class="nav-link-text">Components</span>
-					</a>
-						<ul class="sidenav-second-level collapse" id="collapseComponents">
-							<li><a href="navbar.html">Navbar</a></li>
-							<li><a href="cards.html">Cards</a></li>
-						</ul></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Example Pages"><a
-						class="nav-link nav-link-collapse collapsed"
-						data-toggle="collapse" href="#collapseExamplePages"
-						data-parent="#exampleAccordion"> <i class="fa fa-fw fa-file"></i>
-							<span class="nav-link-text">Example Pages</span>
-					</a>
-						<ul class="sidenav-second-level collapse"
-							id="collapseExamplePages">
-							<li><a href="login.html">Login Page</a></li>
-							<li><a href="register.html">Registration Page</a></li>
-							<li><a href="forgot-password.html">Forgot Password Page</a></li>
-							<li><a href="blank.html">Blank Page</a></li>
-						</ul></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Menu Levels"><a
-						class="nav-link nav-link-collapse collapsed"
-						data-toggle="collapse" href="#collapseMulti"
-						data-parent="#exampleAccordion"> <i
-							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Menu
-								Levels</span>
-					</a>
-						<ul class="sidenav-second-level collapse" id="collapseMulti">
-							<li><a href="#">Second Level Item</a></li>
-							<li><a href="#">Second Level Item</a></li>
-							<li><a href="#">Second Level Item</a></li>
-							<li><a class="nav-link-collapse collapsed"
-								data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-								<ul class="sidenav-third-level collapse" id="collapseMulti2">
-									<li><a href="#">Third Level Item</a></li>
-									<li><a href="#">Third Level Item</a></li>
-									<li><a href="#">Third Level Item</a></li>
-								</ul></li>
-						</ul></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Link"><a class="nav-link" href="#"> <i
-							class="fa fa-fw fa-link"></i> <span class="nav-link-text">Link</span>
-					</a></li>
-
-
 
 				</ul>
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown"
-						href="#" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"> <i class="fa fa-fw fa-envelope"></i> <span
-							class="d-lg-none">Messages <span
-								class="badge badge-pill badge-primary">12 New</span>
-						</span> <span class="indicator text-primary d-none d-lg-block"> <i
-								class="fa fa-fw fa-circle"></i>
-						</span>
-					</a></li>
+					<li class="nav-item dropdown"><a class="nav-link"
+						id="messagesDropdown" href="messages.xhtml"><i
+							class="fa fa-fw fa-envelope"></i> </a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
-						data-target="#exampleModal">#{loginBean.getUsername()}</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="modal"
-						data-target="#exampleModal"> <i class="fa fa-fw fa-sign-out"></i>Logout
-					</a></li>
+						data-target="#exampleModal">#{login.getUsername()}</a></li>
+					<li class="nav-item"><h:commandLink class="nav-link"
+							action="#{login.logout()}">
+							<i class="fa fa-fw fa-sign-out"></i>Logout
+					</h:commandLink></li>
 				</ul>
 			</div>
 		</nav>
@@ -164,34 +108,33 @@
 								Type: #{messageDetails.getMessage().getType().toString()}
 							</div>
 							<div class="pull-right">
-								<h:commandButton id="answer"
-									value="#{messageDetails.isAnswer()}">
-									<f:ajax execute="answer" render="addMessage" />
-								</h:commandButton>
+								<h:commandLink action="#{parameterPassing.goToEditMessage()}">
+									<f:param name="messageId"
+										value="#{messageDetails.getMessage().getId()}" />
+									<i class="fa fa-fw fa-pencil-square-o"></i>
+									<span class="nav-link-text">Edit</span>
+								</h:commandLink>
 							</div>
 							<div class="clearfix"></div>
 						</div>
-						<div class="form-group">
-							<div class="pull-left">
-								<label class="">From:
-									#{messageDetails.getMessage().getCreatedBy().getUsername()}</label>
-							</div>
-							<div class="pull-right">
-								At:
-								<h:outputText class="text-right"
-									value="#{messageDetails.getMessage().getCreatedAt()}">
-									<f:convertDateTime type="date" timeZone="GMT+01:00"
-										pattern="dd.MM.yyyy HH:mm:ss" />
-								</h:outputText>
-							</div>
-							<div class="clearfix"></div>
+						<div class="pull-left">
+							<label class="">From:
+								#{messageDetails.getMessage().getCreatedBy().getUsername()}</label>
 						</div>
+						<div class="pull-right">
+							At:
+							<h:outputText class="text-right"
+								value="#{messageDetails.getMessage().getCreatedAt()}">
+								<f:convertDateTime type="date" timeZone="GMT+01:00"
+									pattern="HH:mm:ss dd.MM.yyyy" />
+							</h:outputText>
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<h:panelGroup class="card-body">
-						<h:inputText id="addMessage" rendered="#{messageBean.isAnswer()}"
-							class="form-control" style="border: none">
-								value="#{messageDetails.newMessage}"></h:inputText>
-					</h:panelGroup>
+					<br />
+					<div class="container-fluid">
+						#{messageDetails.getMessage().getMessage()}</div>
+					<br />
 					<div class="card-footer">
 						<div class="pull-left">
 							<label class="">Status:
@@ -205,21 +148,17 @@
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 
 
 		<!-- Footer-->
-		<div class="content-wrapper">
-			<footer class="sticky-footer">
-				<div class="container">
-					<div class="text-center">
-						<small>PR_DKE WS 2017/18</small>
-					</div>
+		<footer class="sticky-footer">
+			<div class="container">
+				<div class="text-center">
+					<small>PR_DKE WS 2017/18</small>
 				</div>
-			</footer>
-		</div>
+			</div>
+		</footer>
 	</h:form>
 </h:body>
 </html>

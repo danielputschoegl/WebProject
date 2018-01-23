@@ -1,12 +1,186 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta charset="UTF-8" />
+	<meta name="description" content="Project for Uni course DKE PR" />
+	<meta name="keywords" content="..." />
+	<meta name="author"
+		content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-</body>
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"
+		rel="stylesheet" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		rel="stylesheet" />
+
+	<h:outputStylesheet name="css/sb-admin.css" />
+	<h:outputStylesheet name="css/sb-admin.min.css" />
+	<h:outputStylesheet name="css/dataTables.bootstrap4.css" />
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/font-awesome.css" />
+	<h:outputStylesheet name="css/font-awesome.min.css" />
+	<h:outputStylesheet name="css/styles.css" />
+</h:head>
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<h:form>
+		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			id="mainNav">
+			<a class="navbar-brand" href="messages.xhtml">Messages</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+					<li class="nav-item container-fluid" data-toggle="tooltip"
+						data-placement="right" title="Dashboard">
+						<div class="container-fluid">
+							<h:button class="btn btn-primary btn-block"
+								outcome="newMessage?faces-redirect=true" value="New Message" />
+						</div>
+					</li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Dashboard"><a class="nav-link" href="messages.xhtml">
+							<i class="fa fa-fw fa-inbox"></i> <span class="nav-link-text">Inbox</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Dashboard"><a class="nav-link"
+						href="sentMessages.xhtml"> <i class="fa fa-fw fa-share"></i> <span
+							class="nav-link-text">Sent</span>
+					</a></li>
+
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown"><a class="nav-link"
+						id="messagesDropdown" href="messages.xhtml"><i
+							class="fa fa-fw fa-envelope"></i> </a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+						data-target="#exampleModal">#{login.getUsername()}</a></li>
+					<li class="nav-item"><h:commandLink class="nav-link"
+							action="#{login.logout()}">
+							<i class="fa fa-fw fa-sign-out"></i>Logout
+					</h:commandLink></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Body -->
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><h:link
+							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
+					<li class="breadcrumb-item"><h:link
+							outcome="messages.xhtml?faces-redirect=true" class="text-dark">Messages</h:link></li>
+					<li class="breadcrumb-item active">New Message</li>
+				</ol>
+			</div>
+			<div class="container-fluid">
+				<div class="card">
+					<div class="card-header">
+						<div class="form-group">
+							<h5 style="display: inline; vertical-align: top;">Subject:</h5>
+							<h:inputTextarea
+								style="display: inline; border: none; box-shadow: none; width: 93%;"
+								class="bg-light" id="subject" value="#{newMessage.subject}"></h:inputTextarea>
+						</div>
+						<div class="form-group">
+							<div class="pull-right">
+								Type:
+								<h:selectOneMenu id="type" class="btn-light dropdown-toggle"
+									value="#{newMessage.type}">
+									<f:selectItems value="#{newMessage.types}" var="type" />
+								</h:selectOneMenu>
+							</div>
+							<div class="pull-left">
+								<div class="pull-left">
+									<label style="display: inline; vertical-align: top;">To:
+									</label>
+								</div>
+								<div class="pull-right">
+									<p:scrollPanel
+										style="width:400px; height:150px; margin-left: 1%;"
+										class="bg-light">
+										<c:forEach var="role" items="#{newMessage.roles}">
+											<h:commandLink action="#{newMessage.messageTo(role)}">
+												<f:ajax render="@none" />
+												<p style="margin: 0; margin-left: 1%;" class="highlight">
+													#{role.toString()}</p>
+											</h:commandLink>
+										</c:forEach>
+										<c:forEach var="user" items="#{newMessage.users}">
+											<h:commandLink action="#{newMessage.messageTo(user)}">
+												<f:ajax render="@none" />
+												<p style="margin: 0; margin-left: 1%;" class="highlight">
+													#{user.getUsername()}</p>
+											</h:commandLink>
+										</c:forEach>
+									</p:scrollPanel>
+									#{newMessage.getSelected()}
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<div>
+							<label class="">From: #{login.getUser().getUsername()}</label>
+						</div>
+					</div>
+					<br />
+					<h:inputTextarea class="form-control" id="message"
+						style="border: 0; box-shadow: none;" rows="5"
+						value="#{newMessage.message}"></h:inputTextarea>
+					<br />
+					<div class="card-footer">
+						<div>
+							<label for="status">Status: </label>
+							<h:selectOneMenu id="status" class="btn-light dropdown-toggle"
+								value="#{newMessage.status}">
+								<f:selectItems value="#{newMessage.statuses}" var="status" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid" style="text-align: right; margin-bottom: 3%; margin-top: 1%;">
+				<h:commandButton class="btn btn-primary"
+					action="#{newMessage.save(login.getUser())}" value="send"></h:commandButton>
+			</div>
+
+			<!-- Footer-->
+			<footer class="sticky-footer">
+				<div class="container">
+					<div class="text-center">
+						<small>PR_DKE WS 2017/18</small>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<script>
+			$('.highlight').click(function(e) {
+				$(this).toggleClass('bg-secondary');
+			})
+		</script>
+	</h:form>
+</h:body>
 </html>

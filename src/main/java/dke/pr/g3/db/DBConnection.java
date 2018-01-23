@@ -1,6 +1,7 @@
 package dke.pr.g3.db;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -77,13 +78,10 @@ public class DBConnection {
 
 		try {
 			transaction = session.beginTransaction();
-			@SuppressWarnings("unchecked")
-			List<User> resultList = session.createQuery("FROM User u WHERE u.username = :username")
-					.setParameter("username", username).list();
+			User user = (User) session.createQuery("FROM User u WHERE u.username = :username")
+					.setParameter("username", username).uniqueResult();
 			transaction.commit();
-			for (User next : resultList) {
-				return next;
-			}
+			return user;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			if (transaction != null) {
@@ -178,6 +176,7 @@ public class DBConnection {
 		try {
 			@SuppressWarnings("unchecked")
 			List<Message> messages = session.createQuery("FROM Message").list();
+			Collections.sort(messages);
 			return messages;
 		} finally {
 			session.close();
@@ -206,11 +205,34 @@ public class DBConnection {
 			transaction = session.beginTransaction();
 			@SuppressWarnings("unchecked")
 			List<Message> messages = session
-					.createQuery("FROM Message WHERE id IN "
-							+ "(SELECT messageId FROM MessageRecipient WHERE user = :user)"
-							+ "AND createdBy <> :user")
+					.createQuery(
+							"FROM Message WHERE id IN " + "(SELECT messageId FROM MessageRecipient WHERE user = :user)")
 					.setParameter("user", user).list();
 			transaction.commit();
+			Collections.sort(messages);
+			return messages;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+		return null;
+	}
+
+	public static List<Message> getAllSentMessagesForUser(User user) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<Message> messages = session.createQuery("FROM Message WHERE createdBy = :user")
+					.setParameter("user", user).list();
+			transaction.commit();
+			Collections.sort(messages);
 			return messages;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -273,16 +295,45 @@ public class DBConnection {
 		}
 	}
 
-	public static void updateMessageStatus(Long messageId, User currentUser, Status status) {
+	public static void updateMessage(Long messageId, User currentUser, Status status, String text) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
 			Message message = (Message) session.get(Message.class, messageId);
+			if (text != null && !text.isEmpty()) {
+				message.setMessage(text.concat("             <---------------->             ").concat(message.getMessage()));
+			}
 			message.setStatus(status);
 			message.setStatusBy(currentUser);
+			message.setCreatedAt(new Date());
 			session.update(message);
+			transaction.commit();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			session.close();
+		}
+	}
+
+	public static void deleteMessage(Long messageId) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+
+		try {
+			transaction = session.beginTransaction();
+			@SuppressWarnings("unchecked")
+			List<MessageRecipient> messages = session
+					.createQuery("FROM MessageRecipient WHERE messageId = :id").setParameter("id", messageId).list();
+			for(MessageRecipient msg : messages) {
+				session.delete(msg);
+			}
+			Message message = (Message) session.get(Message.class, messageId);
+			session.delete(message);
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -300,8 +351,10 @@ public class DBConnection {
 
 		try {
 			transaction = session.beginTransaction();
-			Message message = (Message) session.get(Message.class, messageId);
-			session.delete(message);
+			MessageRecipient msg = (MessageRecipient) session
+					.createQuery("FROM MessageRecipient WHERE user = :user AND messageId = :id")
+					.setParameter("user", user).setParameter("id", messageId).uniqueResult();
+			session.delete(msg);
 			transaction.commit();
 		} catch (HibernateException e) {
 			e.printStackTrace();

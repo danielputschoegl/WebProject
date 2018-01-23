@@ -20,26 +20,26 @@ import dke.pr.g3.model.Type;
 public class Test {
 
 	public static void main(String[] args) {
-//		DBConnection.deleteAllFromDB();
-		User user1 = new User("test", "test", Role.D);
-		User user2 = new User("daniel", "test", Role.RA);
+		DBConnection.deleteAllFromDB();
+		User test = new User("test", "test", Role.D);
+		User daniel = new User("daniel", "test", Role.RA);
 		List<Role> roles = new ArrayList<>();
 		roles.add(Role.D);
 		roles.add(Role.RA);
 		List<User> user = new ArrayList<>();
-		user.add(user1);
-		user.add(user2);
-		DBConnection.newUser(user1);
-		DBConnection.newUser(user2);
-		DBConnection.newMessage(user2, "testSubject1", "testMessage", Type.S, Status.U, roles);
-		DBConnection.newMessage(user2, "testSubject2", "testMessage", Type.S, Status.U, user);
-		
+		user.add(test);
+		user.add(daniel);
+		DBConnection.newUser(test);
+		DBConnection.newUser(daniel);
+		DBConnection.newMessage(daniel, "testSubject1", "testMessage", Type.S, Status.U, roles);
+		DBConnection.newMessage(test, "testSubject2", "testMessage", Type.S, Status.U, user);
+//		
 //		for (Message next : DBConnection.getAllMessages()) {
 //			System.out.println(next.getId());
 //		}
-		for (Message next : DBConnection.getAllMessagesForUser(user1)) {
-			System.out.println(next.getId());
-		}
+//		for (Message next : DBConnection.getAllMessagesForUser(user1)) {
+//			System.out.println(next.getId());
+//		}
 //		for (MessageRecipient next : DBConnection.getMessageListForUser(user1)) {
 //			System.out.println(next.getMessageId());
 //		}

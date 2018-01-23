@@ -16,7 +16,7 @@ import dke.pr.g3.model.Status;
 import dke.pr.g3.model.Type;
 
 @Entity
-public class Message {
+public class Message implements Comparable<Message> {
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -121,5 +121,10 @@ public class Message {
 
 	public void setStatusBy(User statusBy) {
 		this.statusBy = statusBy;
+	}
+
+	@Override
+	public int compareTo(Message o) {
+		return o.getCreatedAt().compareTo(this.createdAt);
 	}
 }

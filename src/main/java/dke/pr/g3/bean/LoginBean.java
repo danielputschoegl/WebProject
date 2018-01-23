@@ -23,7 +23,6 @@ public class LoginBean {
 			this.loggedIn = true;
 			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 			session.setAttribute("loginBean", this);
-			session.setAttribute("user", this.user);
 			return "secured/index?faces-redirect=true";
 		} else {
 			facesContext.addMessage(
@@ -31,8 +30,19 @@ public class LoginBean {
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
 							"Incorrect Username and Passowrd",
 							"Please enter correct username and Password"));
-			return "login";
+			return "login?faces-redirect=true";
 		}
+	}
+	
+	public String logout() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		this.user = null;
+		this.password = null;
+		this.username = null;
+		this.loggedIn = false;
+		session.setAttribute("loginBean", this);
+		return "/login?faces-redirect=true";
 	}
 	
 	public User getUser() {

@@ -10,12 +10,11 @@ import javax.faces.context.FacesContext;
 
 import dke.pr.g3.db.DBConnection;
 import dke.pr.g3.entities.Message;
-import dke.pr.g3.entities.MessageRecipient;
 import dke.pr.g3.entities.User;
 
-@ManagedBean(name = "message", eager = true)
+@ManagedBean(name = "sentMessage", eager = true)
 @ViewScoped
-public class MessageBean {
+public class SentMessageBean {
 	private User user;
 	private List<Message> messages;
 
@@ -26,14 +25,14 @@ public class MessageBean {
 	public List<Message> getMessages(User user) {
 		this.user = user;
 		if (this.messages == null) {
-			this.messages = DBConnection.getAllMessagesForUser(user);
+			this.messages = DBConnection.getAllSentMessagesForUser(user);
 		}
 		return messages;
 	}
-
-	public void deleteMessage(User user, Long id) throws IOException {
-		DBConnection.deleteMessageForUser(user, id);
+	
+	public void deleteMessage(Long id) throws IOException {
+		DBConnection.deleteMessage(id);
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.redirect("messages.xhtml");
+        externalContext.redirect("sentMessages.xhtml");
 	}
 }

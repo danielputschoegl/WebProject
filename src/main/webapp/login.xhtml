@@ -4,42 +4,45 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<head>
-<meta charset="UTF-8" />
-<meta name="description" content="Project for Uni course DKE PR" />
-<meta name="keywords" content="..." />
-<meta name="author" content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<h:head>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Project for Uni course DKE PR" />
+	<meta name="keywords" content="..." />
+	<meta name="author"
+		content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<link rel="stylesheet" href="resources/css/sb-admin.css" />
-<link rel="stylesheet" href="resources/css/sb-admin.min.css" />
-<link rel="stylesheet" href="resources/css/font-awesome.css" />
-<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
-<link rel="stylesheet" href="resources/css/dataTables.bootstrap4.css" />
-<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
-<link rel="stylesheet" href="resources/css/styles.css" />
+	<link rel="stylesheet" href="resources/css/sb-admin.css" />
+	<link rel="stylesheet" href="resources/css/sb-admin.min.css" />
+	<link rel="stylesheet" href="resources/css/font-awesome.css" />
+	<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="resources/css/dataTables.bootstrap4.css" />
+	<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="resources/css/styles.css" />
 
-<title>Home</title>
-</head>
-<body class="bg-dark">
+	<h:title>Login</h:title>
+</h:head>
+<h:body class="bg-dark">
 	<div class="container">
 		<div class="card card-login mx-auto mt-5">
 			<div class="card-header">Login</div>
 			<div class="card-body">
 				<h:form>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Username</label> 
-						<h:inputText class="form-control" id="username" value="#{login.username}" placeholder="Username"></h:inputText>
+						<label for="username">Username</label>
+						<h:inputText class="form-control" id="username"
+							value="#{login.username}" placeholder="Username"></h:inputText>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label> 
-						<h:inputSecret class="form-control" id="password" value="#{login.password}" placeholder="Password"></h:inputSecret>
+						<label for="password">Password</label>
+						<h:inputSecret class="form-control" id="password"
+							value="#{login.password}" placeholder="Password"></h:inputSecret>
 					</div>
-					<h:commandButton class="btn btn-primary btn-block" action="#{login.validateUsernamePassword}"
-							value="Login"></h:commandButton>
+					<h:commandButton class="btn btn-primary btn-block"
+						action="#{login.validateUsernamePassword}" value="Login"></h:commandButton>
 				</h:form>
 			</div>
 		</div>
 	</div>
-</body>
+</h:body>
 </html>

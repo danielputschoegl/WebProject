@@ -96,7 +96,7 @@
 
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fa fa-envelope"></i> Inbox
+					<i class="fa fa-envelope"></i> Sent
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -104,7 +104,6 @@
 							cellspacing="0">
 							<thead>
 								<tr class="bg-light">
-									<th>From</th>
 									<th>Subject</th>
 									<th>Date</th>
 									<th>Type</th>
@@ -114,7 +113,6 @@
 							</thead>
 							<tfoot>
 								<tr class="bg-light">
-									<th>From</th>
 									<th>Subject</th>
 									<th>Date</th>
 									<th>Type</th>
@@ -124,14 +122,8 @@
 							</tfoot>
 							<tbody>
 								<c:forEach var="msg"
-									items="#{message.getMessages(login.getUser())}">
+									items="#{sentMessage.getMessages(login.getUser())}">
 									<tr>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{parameterPassing.goToMessageDetails()}"
-												class="text-dark">
-												<f:param name="messageId" value="#{msg.getId()}" />
-            									#{msg.getCreatedBy().getUsername()}
-        									</h:commandLink></th>
 										<th style="font-weight: normal"><h:commandLink
 												action="#{parameterPassing.goToMessageDetails()}"
 												class="text-dark">
@@ -144,7 +136,7 @@
 												<f:param name="messageId" value="#{msg.getId()}" />
 												<h:outputText value="#{msg.getCreatedAt()}">
 													<f:convertDateTime type="date" timeZone="GMT+01:00"
-														pattern="HH:mm:ss dd.MM.yyyy" />
+														pattern="HH:mm:ss     dd.MM.yyyy" />
 												</h:outputText>
 											</h:commandLink></th>
 										<th style="font-weight: normal"><h:commandLink
@@ -160,7 +152,7 @@
 												#{msg.getStatus().toString()}
 											</h:commandLink></th>
 										<th style="font-weight: normal"><h:commandLink
-												action="#{message.deleteMessage(login.getUser(), msg.getId())}"
+												action="#{sentMessage.deleteMessage(msg.getId())}"
 												class="text-dark">
 												<i class="fa fa-fw fa-trash"></i>
 											</h:commandLink></th>
