@@ -3,7 +3,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 	<meta charset="UTF-8" />
 	<meta charset="UTF-8" />
@@ -31,13 +33,14 @@
 	<h:outputStylesheet name="css/font-awesome.css" />
 	<h:outputStylesheet name="css/font-awesome.min.css" />
 	<h:outputStylesheet name="css/styles.css" />
+
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{splitRules.init(parameterPassing.getRootContext(), parameterPassing.getFirstContext(), parameterPassing.getSecondContext())}" />
+	</f:metadata>
 	<h:form>
-		<f:metadata>
-			<f:viewParam name="context" value="#{contextDetails.context}"></f:viewParam>
-		</f:metadata>
-
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 			id="mainNav">
@@ -56,13 +59,15 @@
 							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Parameters"><a class="nav-link" href="parameterList.xhtml">
-							<i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
+						title="Parameters"><a class="nav-link"
+						href="parameterList.xhtml"> <i class="fa fa-fw fa-file-code-o"></i>
+							<span class="nav-link-text">Parameters</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Delete ParameterValue"><a class="nav-link"
 						href="parameterValueList.xhtml"> <i
-							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter
+								Values</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Merge Context"><a class="nav-link"
@@ -90,68 +95,58 @@
 		</nav>
 
 		<!-- Body -->
+
 		<div class="content-wrapper">
 			<div class="container-fluid">
 				<!-- Breadcrumbs-->
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><h:link
 							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
-							<li class="breadcrumb-item"><h:link
-							outcome="contextList.xhtml?faces-redirect=true" class="text-dark">Contexts</h:link></li>
-					<li class="breadcrumb-item active">Context Rules</li>
+					<li class="breadcrumb-item"><h:link
+							outcome="splitContext.xhtml?faces-redirect=true"
+							class="text-dark">Split Context</h:link></li>
+					<li class="breadcrumb-item active">Split Rules</li>
 				</ol>
 			</div>
 
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fa fa-envelope"></i> Context Rules
+					<i class="fa fa-scissors"></i> Split Rules
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
-							<thead>
-								<tr class="bg-light">
-									<th>Id</th>
-									<th>Rule</th>
-									<th></th>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr class="bg-light">
-									<th>Id</th>
-									<th>Rule</th>
-									<th></th>
-								</tr>
-							</tfoot>
+						<table class="table" style="border-top: none" id="dataTable"
+							width="100%" cellspacing="0">
 							<tbody>
-								<c:forEach var="rule" items="#{contextDetails.rules}">
-									<tr>
-										<th style="font-weight: normal">#{rule.getKey()}</th>
-										<th style="font-weight: normal">#{rule.getValue()}</th>
-										<th style="font-weight: normal"><h:commandLink
-												action="#{contextDetails.deleteRule(rule.getKey())}" class="text-dark">
-												<i class="fa fa-fw fa-trash"></i>
-											</h:commandLink></th>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-
-						<table class="table" style="border-top: none" id="dataTable" width="100%"
-							cellspacing="0">
-							<tbody>
-									<tr>
-										<th>Rule:</th>
-										<th style="font-weight: normal; vertical-align: middle;"><h:inputTextarea style=" width: 100%" value="#{contextDetails.rule}"></h:inputTextarea></th>
-										<th style="font-weight: normal">
-												<h:commandButton class="btn btn-primary"
-													action="#{contextDetails.addRule()}" value="add"></h:commandButton></th>
-									</tr>
+								<tr>
+									<th style="font-weight: normal; vertical-align: middle"><p:scrollPanel
+											style="width:500px; height:200px; margin-left: 1%;"
+											class="bg-light">
+											<ui:repeat var="rule" value="#{splitRules.getRules()}">
+												<h:commandLink action="#{splitRules.addFirstRule(rule)}">
+													<f:ajax render="@none" />
+													<p style="margin: 0; margin-left: 1%;" class="highlight">#{rule}</p>
+												</h:commandLink>
+											</ui:repeat>
+										</p:scrollPanel></th>
+									<th style="font-weight: normal; vertical-align: middle"><p:scrollPanel
+											style="width:500px; height:200px; margin-left: 1%;"
+											class="bg-light">
+											<ui:repeat var="rule" value="#{splitRules.getRules()}">
+												<h:commandLink action="#{splitRules.addSecondRule(rule)}">
+													<f:ajax render="@none" />
+													<p style="margin: 0; margin-left: 1%;" class="highlight">#{rule}</p>
+												</h:commandLink>
+											</ui:repeat>
+										</p:scrollPanel></th>
+								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
+
+				<div class="container-fluid" style="margin-bottom: 3%;"></div>
+
 				<div class="card-footer small text-muted">Last Update:
 					#{currentDate}</div>
 			</div>
@@ -165,6 +160,12 @@
 				</div>
 			</div>
 		</footer>
+
+		<script>
+			$('.highlight').click(function(e) {
+				$(this).toggleClass('bg-secondary');
+			})
+		</script>
 	</h:form>
 </h:body>
 </html>

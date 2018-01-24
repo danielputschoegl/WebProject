@@ -20,10 +20,10 @@ public class ContextListBean {
 	private String contextDescription = "";
 
 	public String delete(String ctx) throws IOException {
-
 		try {
 			flora.init();
 			flora.delCtx(ctx, true);
+			this.contexts = flora.getCtxs();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -66,7 +66,11 @@ public class ContextListBean {
 				+ ":AIMCtx[" + this.contextDescription + ",file->'" + path
 				+ this.contextName + ".flr'].";
 		String fCtx = path + this.contextName + ".flr";
+		
 		flora.addCtx(ctxDef, fCtx);
+		this.contextDescription = null;
+		this.contextName = null;
+		this.contexts = flora.getCtxs();
 	}
 
 	public String getContextName() {

@@ -1,32 +1,40 @@
 package dke.pr.g3.bean;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import dke.pr.cli.Flora2Interface;
 
-@ManagedBean(name = "mergeContext", eager = true)
+@ManagedBean(name = "mergeContext")
 @ViewScoped
 public class MergeContextBean {
-	public String rulesFromFirstContext;
-	public String rulesFromSecondContext;
-	public String firstContext;
-	public String secondContext;
-	Flora2Interface base = new Flora2Interface();
-
-	public String merge() {
-		try {
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	private Flora2Interface flora = new Flora2Interface();
+	private List<String> contexts;
+	private String firstContext;
+	private String secondContext;
+	
+	public void merge() throws Exception {
+		flora.init();
+		List<String> rules = flora.getRulesAsList(this.firstContext);
+		for(String rule : rules) {
+			flora.addRule(secondContext, rule);
 		}
-		return "index?faces-redirect=true";
+		flora.delCtx(firstContext, true);
+		this.firstContext = null;
+		this.secondContext = null;
 	}
 
+	public List<String> getContexts() throws IOException {
+		if (contexts == null) {
+			flora.init();
+			this.contexts = flora.getCtxs();
+		}
 
+		return this.contexts;
+	}
 
 	public String getFirstContext() {
 		return firstContext;
@@ -42,21 +50,5 @@ public class MergeContextBean {
 
 	public void setSecondContext(String secondContext) {
 		this.secondContext = secondContext;
-	}
-
-	public String getRulesFromFirstContext() {
-		return rulesFromFirstContext;
-	}
-
-	public void setRulesFromFirstContext(String rulesFromFirstContext) {
-		this.rulesFromFirstContext = rulesFromFirstContext;
-	}
-
-	public String getRulesFromSecondContext() {
-		return rulesFromSecondContext;
-	}
-
-	public void setRulesFromSecondContext(String rulesFromSecondContext) {
-		this.rulesFromSecondContext = rulesFromSecondContext;
 	}
 }

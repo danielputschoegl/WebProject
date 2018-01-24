@@ -3,7 +3,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
 	<meta charset="UTF-8" />
@@ -34,14 +35,11 @@
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<h:form>
-		<f:metadata>
-			<f:viewParam name="context" value="#{contextDetails.context}"></f:viewParam>
-		</f:metadata>
 
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 			id="mainNav">
-			<a class="navbar-brand" href="index.xhtml">Dashboard</a>
+			<a class="navbar-brand" href="contextList.xhtml">Context</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -51,29 +49,57 @@
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Contexts"><a class="nav-link" href="contextList.xhtml">
-							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Parameters"><a class="nav-link" href="parameterList.xhtml">
-							<i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Delete ParameterValue"><a class="nav-link"
-						href="parameterValueList.xhtml"> <i
-							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
+							<i class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Contexts</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Merge Context"><a class="nav-link"
-						href="mergeContext.xhtml"> <i class="fa fa-fw fa-compress"></i>
-							<span class="nav-link-text">Merge Context</span>
+						href="mergeContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">MergeContext</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Split Context"><a class="nav-link"
-						href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
-							<span class="nav-link-text">Split Context</span>
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">SplitContext</span>
 					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete ParameterValue"><a class="nav-link"
+						href="deleteParameterValue.xhtml"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">DeleteParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete Parameter"><a class="nav-link"
+						href="deleteParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">DeleteParameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">SplitContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New Parameter"><a class="nav-link"
+						href="newParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">NewParameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New ParameterValue"><a class="nav-link"
+						href="newParameterValue.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">NewParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Update Context"><a class="nav-link"
+						href="updateContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">UpdateContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Parameters"><a class="nav-link"
+						href="BowlOfParameterSpagehtti.jsp"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameters</span>
+					</a></li>
+
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown"><a class="nav-link"
@@ -96,15 +122,13 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><h:link
 							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
-							<li class="breadcrumb-item"><h:link
-							outcome="contextList.xhtml?faces-redirect=true" class="text-dark">Contexts</h:link></li>
-					<li class="breadcrumb-item active">Context Rules</li>
+					<li class="breadcrumb-item active">Parameter</li>
 				</ol>
 			</div>
 
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fa fa-envelope"></i> Context Rules
+					<i class="fa fa-envelope"></i> Parameter
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -112,25 +136,24 @@
 							cellspacing="0">
 							<thead>
 								<tr class="bg-light">
-									<th>Id</th>
-									<th>Rule</th>
+									<th>Parameter</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr class="bg-light">
-									<th>Id</th>
-									<th>Rule</th>
+									<th>Parameter</th>
 									<th></th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<c:forEach var="rule" items="#{contextDetails.rules}">
+								<c:forEach var="parameter"
+									items="#{parameterList.getParameters()}">
 									<tr>
-										<th style="font-weight: normal">#{rule.getKey()}</th>
-										<th style="font-weight: normal">#{rule.getValue()}</th>
+										<th style="font-weight: normal">#{parameter}</th>
 										<th style="font-weight: normal"><h:commandLink
-												action="#{contextDetails.deleteRule(rule.getKey())}" class="text-dark">
+												action="#{parameterList.delete(parameter)}"
+												class="text-dark">
 												<i class="fa fa-fw fa-trash"></i>
 											</h:commandLink></th>
 									</tr>
@@ -138,16 +161,17 @@
 							</tbody>
 						</table>
 
-						<table class="table" style="border-top: none" id="dataTable" width="100%"
-							cellspacing="0">
+						<table class="table" style="border-top: none" id="dataTable"
+							width="100%" cellspacing="0">
 							<tbody>
-									<tr>
-										<th>Rule:</th>
-										<th style="font-weight: normal; vertical-align: middle;"><h:inputTextarea style=" width: 100%" value="#{contextDetails.rule}"></h:inputTextarea></th>
-										<th style="font-weight: normal">
-												<h:commandButton class="btn btn-primary"
-													action="#{contextDetails.addRule()}" value="add"></h:commandButton></th>
-									</tr>
+								<tr>
+									<th>new Parameter:</th>
+									<th style="font-weight: normal; vertical-align: middle;"><h:inputTextarea
+											style=" width: 100%" value="#{parameterList.parameterName}"></h:inputTextarea></th>
+									<th style="font-weight: normal"><h:commandButton
+											class="btn btn-primary" action="#{parameterList.add()}"
+											value="add"></h:commandButton></th>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -156,6 +180,7 @@
 					#{currentDate}</div>
 			</div>
 		</div>
+
 
 		<!-- Footer-->
 		<footer class="sticky-footer">

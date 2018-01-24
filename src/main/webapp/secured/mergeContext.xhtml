@@ -3,55 +3,172 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
+	<meta charset="UTF-8" />
 	<meta charset="UTF-8" />
 	<meta name="description" content="Project for Uni course DKE PR" />
 	<meta name="keywords" content="..." />
 	<meta name="author"
 		content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-	<link rel="stylesheet" href="resources/css/sb-admin.css" />
-	<link rel="stylesheet" href="resources/css/sb-admin.min.css" />
-	<link rel="stylesheet" href="resources/css/font-awesome.css" />
-	<link rel="stylesheet" href="resources/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="resources/css/dataTables.bootstrap4.css" />
-	<link rel="stylesheet" href="resources/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="resources/css/styles.css" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"
+		rel="stylesheet" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		rel="stylesheet" />
 
-	<title>Merge Context</title>
+	<h:outputStylesheet name="css/sb-admin.css" />
+	<h:outputStylesheet name="css/sb-admin.min.css" />
+	<h:outputStylesheet name="css/dataTables.bootstrap4.css" />
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/font-awesome.css" />
+	<h:outputStylesheet name="css/font-awesome.min.css" />
+	<h:outputStylesheet name="css/styles.css" />
+
 </h:head>
-<h:body>
-	<h2>Choose the contexts you want to merge</h2>
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
 	<h:form>
-		<div class="form-group">
-			<label for="exampleInputContext">Context to merge </label>
-			<h:inputText class="form-control" id="contextToMerge"
-				value="#{mergeContext.contextToMerge}" placeholder="ContextToMerge"></h:inputText>
-			<br></br> <br></br> <label for="exampleInputContext">first
-				Context </label>
-			<h:inputText class="form-control" id="firstContext"
-				value="#{mergeContext.firstContext}" placeholder="FirstContext"></h:inputText>
-			<br></br> <br></br> <label for="exampleInputContext">rules to
-				first Context </label>
-			<h:inputText class="form-control" id="rulesFromFirstContext"
-				value="#{mergeContext.rulesFromFirstContext}"
-				placeholder="RulesFromFirstContext"></h:inputText>
-			<br></br> <br></br> <label for="exampleInputContext">second
-				Context </label>
-			<h:inputText class="form-control" id="secondContext"
-				value="#{mergeContext.secondContext}" placeholder="SecondContext"></h:inputText>
-			<br></br> <br></br> <label for="exampleInputContext">rules to
-				second Context </label>
-			<h:inputText class="form-control" id="rulesFromSecondContext"
-				value="#{mergeContext.rulesFromSecondContext}"
-				placeholder="RulesFromSecondContext"></h:inputText>
 
+		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			id="mainNav">
+			<a class="navbar-brand" href="index.xhtml">Dashboard</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Contexts"><a class="nav-link" href="contextList.xhtml">
+							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Parameters"><a class="nav-link" href="parameterList.xhtml">
+							<i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete ParameterValue"><a class="nav-link"
+						href="parameterValueList.xhtml"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Merge Context"><a class="nav-link"
+						href="mergeContext.xhtml"> <i class="fa fa-fw fa-compress"></i>
+							<span class="nav-link-text">Merge Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
+							<span class="nav-link-text">Split Context</span>
+					</a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown"><a class="nav-link"
+						id="messagesDropdown" href="messages.xhtml"><i
+							class="fa fa-fw fa-envelope"></i> </a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+						data-target="#exampleModal">#{login.getUsername()}</a></li>
+					<li class="nav-item"><h:commandLink class="nav-link"
+							action="#{login.logout()}">
+							<i class="fa fa-fw fa-sign-out"></i>Logout
+					</h:commandLink></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Body -->
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><h:link
+							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
+					<li class="breadcrumb-item active">Merge Context</li>
+				</ol>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-envelope"></i> Merge Context
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table" style="border-top: none" id="dataTable"
+							width="100%" cellspacing="0">
+							<tbody>
+								<tr>
+									<th style="font-weight: normal; vertical-align: middle"><p:scrollPanel
+											style="width:500px; height:200px; margin-left: 1%;"
+											class="bg-light">
+											<c:forEach var="context"
+												items="#{mergeContext.getContexts()}">
+												<h:commandLink
+													action="#{mergeContext.setFirstContext(context)}">
+													<f:ajax render="@none" />
+													<p style="margin: 0; margin-left: 1%;"
+														class="singleHighlight">#{context}</p>
+												</h:commandLink>
+											</c:forEach>
+										</p:scrollPanel></th>
+									<th style="vertical-align: middle">-></th>
+									<th style="font-weight: normal; vertical-align: middle"><p:scrollPanel
+											style="width:500px; height:200px; margin-left: 1%;"
+											class="bg-light">
+											<c:forEach var="context"
+												items="#{mergeContext.getContexts()}">
+												<h:commandLink
+													action="#{mergeContext.setSecondContext(context)}">
+													<f:ajax render="@none" />
+													<p style="margin: 0; margin-left: 1%;"
+														class="singleHighlight">#{context}</p>
+												</h:commandLink>
+											</c:forEach>
+										</p:scrollPanel></th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="container-fluid"
+					style="margin-bottom: 3%;">
+					<h:commandButton class="btn btn-primary"
+						action="#{mergeContext.merge()}" value="merge"></h:commandButton>
+				</div>
+
+				<div class="card-footer small text-muted">Last Update:
+					#{currentDate}</div>
+			</div>
 		</div>
-		<br></br>
-		<h:commandButton class="btn btn-primary btn-block"
-			action="#{splitContext.split}" value="SplitContext"></h:commandButton>
+
+		<!-- Footer-->
+		<footer class="sticky-footer">
+			<div class="container">
+				<div class="text-center">
+					<small>PR_DKE WS 2017/18</small>
+				</div>
+			</div>
+		</footer>
+		<script>
+			var addclass = 'bg-secondary';
+			var $cols = $('.singleHighlight').click(function(e) {
+				$cols.removeClass(addclass);
+				$(this).addClass(addclass);
+			});
+		</script>
 	</h:form>
 </h:body>
 </html>

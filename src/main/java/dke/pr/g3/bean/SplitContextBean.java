@@ -1,58 +1,40 @@
 package dke.pr.g3.bean;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import dke.pr.cli.Flora2Interface;
+import dke.pr.g3.entities.User;
 
 @ManagedBean(name = "splitContext", eager = true)
 @ViewScoped
 public class SplitContextBean {
-	public String contextToSplit;
-	public String rulesToFirstContext;
-	public String rulesToSecondContext;
-	public String firstContext;
-	public String secondContext;
-	Flora2Interface base = new Flora2Interface();
+	private Flora2Interface flora = new Flora2Interface();
+	private List<String> contexts;
+	private String rootContext;
+	private String firstContext;
+	private String secondContext;
 
-	public String split() {
-		try {
-			base.init();
-			base.addCtx(rulesToFirstContext, firstContext);
-			base.addCtx(rulesToSecondContext, secondContext);
-			base.delCtx(contextToSplit, true);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public List<String> getContexts() throws IOException {
+		if (contexts == null) {
+			flora.init();
+			this.contexts = flora.getCtxs();
 		}
-		return "index?faces-redirect=true";
+
+		return this.contexts;
 	}
 
-	public String getContextToSplit() {
-		return contextToSplit;
+	public String getRootContext() {
+		return rootContext;
 	}
 
-	public void setContextToSplit(String contextToSplit) {
-		this.contextToSplit = contextToSplit;
-	}
-
-	public String getRulesToFirstContext() {
-		return rulesToFirstContext;
-	}
-
-	public void setRulesToFirstContext(String rulesToFirstContext) {
-		this.rulesToFirstContext = rulesToFirstContext;
-	}
-
-	public String getRulesToSecondContext() {
-		return rulesToSecondContext;
-	}
-
-	public void setRulesToSecondContext(String rulesToSecondContext) {
-		this.rulesToSecondContext = rulesToSecondContext;
+	public void setRootContext(String rootContext) {
+		this.rootContext = rootContext;
 	}
 
 	public String getFirstContext() {
@@ -70,5 +52,4 @@ public class SplitContextBean {
 	public void setSecondContext(String secondContext) {
 		this.secondContext = secondContext;
 	}
-
 }

@@ -87,14 +87,16 @@ public class CBRInterface extends Flora2CLI {
 	 * ATTENTION: Requires -
 	 * transCtx(?X,?Y):-?X:AIMCtx[specialises->?Z],?Z[specialises->?Y], \+ (?X =
 	 * ?Z), \+ (?Z = ?Y). - in ctxModelAIM.flr or ctxModel.flr
+	 * 
+	 * eqCtx(?c1,?c2):- ?c1:AIMCtx, ?c2:AIMCtx, true{forall(?v)^(?c1[?p:Parameter->?v] ~~> ?c2[?p:Parameter->?v])}.
 	 *
 	 * @return List of context-pairs [subCtx,superCtx]
 	 * @throws IOException
 	 */
 	public List<String[]> getCtxHierarchy() throws IOException {
 		String cmd = String
-				.format("?subCtx:%s[specialises->?superCtx]@%s,\\+ (?superCtx =?subCtx),\\naf transCtx(?subCtx,?superCtx)@%s.",
-						CONTEXT_CLASS, MODEL_MODULE, MODEL_MODULE);
+				.format("?subCtx:%s[specialises->?superCtx]@%s,\\naf eqCtx(?subCtx,?superCtx)@%s,\\naf transCtx(?subCtx,?superCtx)@%s.",
+						CONTEXT_CLASS,MODEL_MODULE, MODEL_MODULE, MODEL_MODULE);
 		String ret = issueCommand(cmd);
 		return parseMultipleVars(ret, 2);
 	}
@@ -476,7 +478,7 @@ public class CBRInterface extends Flora2CLI {
 	public boolean delRule(String ctx, String ruleID) throws Exception {
 		String rules = this.getCtxFile(ctx).replace("'", "");
 		return replaceRegExPatternFromFile(new File(rules), "(?s)\\@!\\{"
-				+ ruleID + ".*\\.", "");
+				+ ruleID + "[\\s,}].*\\.", "");
 	}
 
 	// ---------------context
@@ -555,6 +557,13 @@ public class CBRInterface extends Flora2CLI {
 	 */
 	public boolean delParameter(String pName) throws IOException {
 		File model = new File(F_CTX_MODEL);
+		
+		List<String> paramValues = getParameterParameterValues(pName);
+		
+		for(String val : paramValues){
+			delParameterValue(val);
+		}
+		
 		removeRegExPatternFromFile(model, "(?s)" + pName + ":Parameter\\.");
 		removeRegExPatternFromFile(model, "(?s)" + pName + "\\[.*\\.");
 		removeRegExPatternFromFile(model, "(?s)\\{[\\w, ]*\\}:" + pName + "\\.");

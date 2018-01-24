@@ -48,7 +48,7 @@ public class Flora2CLI {
 	public boolean start() throws IOException {
 		ProcessBuilder builder = new ProcessBuilder(
 				"C:\\Users\\Uni\\Flora-2\\flora2\\runflora.bat");
-
+		
 		builder.redirectErrorStream(true);
 
 		process = builder.start();
@@ -126,7 +126,8 @@ public class Flora2CLI {
 	 */
 	public boolean loadFile(String f) throws IOException {
 		String cmd = "['" + f + "'].";
-		return issueCommand(cmd).contains("Yes");
+		String res = issueCommand(cmd);
+		return res.contains("Yes");
 	}
 
 	/**

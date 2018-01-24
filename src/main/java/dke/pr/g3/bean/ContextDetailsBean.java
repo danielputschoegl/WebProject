@@ -26,6 +26,12 @@ public class ContextDetailsBean {
 		
 		return this.rules;
 	}
+	
+	public void deleteRule(String id) throws Exception {
+		flora.init();
+		flora.delRule(this.context, id);
+		this.rules = flora.getRules(this.context);
+	}
 
 	public String getRule() {
 		return rule;
@@ -46,6 +52,7 @@ public class ContextDetailsBean {
 	public void addRule() throws Exception {
 		flora.addRule(this.context, this.rule);
 		this.rule = null;
+		this.rules = flora.getRules(this.context);
 	}
 }
 	

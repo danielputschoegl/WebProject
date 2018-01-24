@@ -39,7 +39,7 @@
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 			id="mainNav">
-			<a class="navbar-brand" href="index.xhtml">Dashboard</a>
+			<a class="navbar-brand" href="contextList.xhtml">Context</a>
 			<button class="navbar-toggler navbar-toggler-right" type="button"
 				data-toggle="collapse" data-target="#navbarResponsive"
 				aria-controls="navbarResponsive" aria-expanded="false"
@@ -49,29 +49,57 @@
 
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Contexts"><a class="nav-link" href="contextList.xhtml">
-							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Parameters"><a class="nav-link" href="parameterList.xhtml">
-							<i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
-					</a></li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Delete ParameterValue"><a class="nav-link"
-						href="parameterValueList.xhtml"> <i
-							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
+							<i class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Contexts</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Merge Context"><a class="nav-link"
-						href="mergeContext.xhtml"> <i class="fa fa-fw fa-compress"></i>
-							<span class="nav-link-text">Merge Context</span>
+						href="mergeContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">MergeContext</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Split Context"><a class="nav-link"
-						href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
-							<span class="nav-link-text">Split Context</span>
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">SplitContext</span>
 					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete ParameterValue"><a class="nav-link"
+						href="deleteParameterValue.xhtml"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">DeleteParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete Parameter"><a class="nav-link"
+						href="deleteParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">DeleteParameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">SplitContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New Parameter"><a class="nav-link"
+						href="newParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">NewParameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New ParameterValue"><a class="nav-link"
+						href="newParameterValue.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">NewParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Update Context"><a class="nav-link"
+						href="updateContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">UpdateContext</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Parameters"><a class="nav-link"
+						href="BowlOfParameterSpagehtti.jsp"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameters</span>
+					</a></li>
+
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown"><a class="nav-link"
@@ -94,13 +122,13 @@
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><h:link
 							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
-					<li class="breadcrumb-item active">Context</li>
+					<li class="breadcrumb-item active">Parameter</li>
 				</ol>
 			</div>
 
 			<div class="card mb-3">
 				<div class="card-header">
-					<i class="fa fa-archive"></i> Context
+					<i class="fa fa-envelope"></i> Parameter
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -108,25 +136,24 @@
 							cellspacing="0">
 							<thead>
 								<tr class="bg-light">
-									<th>Context</th>
+									<th>Parameter Values</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr class="bg-light">
-									<th>Context</th>
+									<th>Parameter Values</th>
 									<th></th>
 								</tr>
 							</tfoot>
 							<tbody>
-								<c:forEach var="ctx" items="#{contextList.getContexts()}">
+								<c:forEach var="parameterValue"
+									items="#{parameterValueList.getParameterValues()}">
 									<tr>
-										<th style="font-weight: normal"><h:link
-												outcome="contextDetails.xhtml" class="text-dark">
-												<f:param name="context" value="#{ctx}"></f:param>
-												#{ctx}</h:link></th>
+										<th style="font-weight: normal">#{parameterValue}</th>
 										<th style="font-weight: normal"><h:commandLink
-												action="#{contextList.delete(ctx)}" class="text-dark">
+												action="#{parameterValueList.deleteParameterValue(parameterValue)}"
+												class="text-dark">
 												<i class="fa fa-fw fa-trash"></i>
 											</h:commandLink></th>
 									</tr>
@@ -139,25 +166,39 @@
 							<tbody>
 								<tr>
 									<th style="font-weight: normal"><p:scrollPanel
-											style="width:400px; height:150px; margin-left: 1%;"
+											style="width:350px; height:150px; margin-left: 1%;"
 											class="bg-light">
-											<c:forEach var="parameter" items="#{contextList.parameters}">
+											<c:forEach var="parameter"
+												items="#{parameterValueList.parameters}">
 												<h:commandLink
-													action="#{contextList.addContextDescription(parameter)}">
-													<f:ajax render="newContext" />
-													<p style="margin: 0; margin-left: 1%;" class="highlight">
-														#{parameter}</p>
+													action="#{parameterValueList.setParameter(parameter)}">
+													<f:ajax render="@none" />
+													<p style="margin: 0; margin-left: 1%;"
+														class="singleHighlight">#{parameter}</p>
 												</h:commandLink>
 											</c:forEach>
 										</p:scrollPanel></th>
 									<th style="font-weight: normal"><p:scrollPanel
-											style="width:400px; height:150px; margin-left: 1%;"
+											style="width:350px; height:150px; margin-left: 1%;"
 											class="bg-light">
 											<c:forEach var="parameterValue"
-												items="#{contextList.parameterValues}">
+												items="#{parameterValueList.getParameterValues()}">
 												<h:commandLink
-													action="#{contextList.addContextDescription(parameterValue)}">
-													<f:ajax render="newContext" />
+													action="#{parameterValueList.addParentParameterValue(parameterValue)}">
+													<f:ajax render="@none" />
+													<p style="margin: 0; margin-left: 1%;" class="highlight">
+														#{parameterValue}</p>
+												</h:commandLink>
+											</c:forEach>
+										</p:scrollPanel></th>
+									<th style="font-weight: normal"><p:scrollPanel
+											style="width:350px; height:150px; margin-left: 1%;"
+											class="bg-light">
+											<c:forEach var="parameterValue"
+												items="#{parameterValueList.getParameterValues()}">
+												<h:commandLink
+													action="#{parameterValueList.addChildParameterValue(parameterValue)}">
+													<f:ajax render="@none" />
 													<p style="margin: 0; margin-left: 1%;" class="highlight">
 														#{parameterValue}</p>
 												</h:commandLink>
@@ -167,26 +208,19 @@
 							</tbody>
 						</table>
 
-						<h:panelGroup id="newContext">
-							<table class="table" style="border-top: none" id="dataTable"
-								width="100%" cellspacing="0">
-								<tbody>
-									<tr>
-										<th>Context:</th>
-										<th style="font-weight: normal; vertical-align: top;"><h:inputTextarea
-												style=" width: 100%" value="#{contextList.contextName}">
-											</h:inputTextarea></th>
-										<th style="font-weight: normal; vvertical-align: top;"><h:inputTextarea
-												style=" width: 100%"
-												value="#{contextList.contextDescription}">
-												<f:ajax render="newContext" /></h:inputTextarea></th>
-										<th style="font-weight: normal"><h:commandButton
-												class="btn btn-primary" action="#{contextList.addContext()}"
-												value="add"></h:commandButton></th>
-									</tr>
-								</tbody>
-							</table>
-						</h:panelGroup>
+						<table class="table" style="border-top: none" id="dataTable"
+							width="100%" cellspacing="0">
+							<tbody>
+								<tr>
+									<th>Parameter Value:</th>
+									<th style="font-weight: normal; vertical-align: middle;"><h:inputText
+											style=" width: 100%" value="#{parameterValueList.name}"></h:inputText></th>
+									<th style="font-weight: normal"><h:commandButton
+											class="btn btn-primary" action="#{parameterValueList.addParameterValue()}"
+											value="add"></h:commandButton></th>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 				<div class="card-footer small text-muted">Last Update:
@@ -203,6 +237,17 @@
 				</div>
 			</div>
 		</footer>
+		<script>
+			var addclass = 'bg-secondary';
+			var $cols = $('.singleHighlight').click(function(e) {
+				$cols.removeClass(addclass);
+				$(this).addClass(addclass);
+			});
+
+			$('.highlight').click(function(e) {
+				$(this).toggleClass('bg-secondary');
+			})
+		</script>
 	</h:form>
 </h:body>
 </html>

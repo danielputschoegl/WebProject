@@ -16,8 +16,8 @@ public class Flora2Interface {
 
 	public String init() throws IOException {
 		try {
-			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr",
-					"C:/Users/Uni/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr", "C:/Users/Uni/Flora-2/CBRM/bc.flr",
+					"AIMCtx", "SemNOTAMCase");
 
 			fl.setDebug(false);
 		} catch (IOException e) {
@@ -63,9 +63,7 @@ public class Flora2Interface {
 	}
 
 	public boolean delCtx(String ctx, boolean fileAlso) throws Exception {
-		boolean out = false;
-		out = fl.delCtx(ctx, fileAlso);
-		return out;
+		return fl.delCtx(ctx, fileAlso);
 	}
 
 	public String getCtxFile(String ctx) throws Exception {
@@ -95,8 +93,8 @@ public class Flora2Interface {
 	public List<String> getParametersAsList() {
 
 		try {
-			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr",
-					"C:/Users/Uni/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr", "C:/Users/Uni/Flora-2/CBRM/bc.flr",
+					"AIMCtx", "SemNOTAMCase");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -104,14 +102,14 @@ public class Flora2Interface {
 
 		fl.setDebug(false);
 		List<String> parameters = null;
-		
+
 		try {
 			parameters = fl.getParameters();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return parameters;
 	}
 
@@ -225,21 +223,18 @@ public class Flora2Interface {
 		return out;
 	}
 
-	public ArrayList<String> getRulesAsArrayList() throws Exception {
-		ArrayList<String> out = new ArrayList<String>();
+	public List<String> getRulesAsList(String ctx) throws Exception {
+		List<String> out = new ArrayList<String>();
 		HashMap<String, String> rules;
-		List<String> ctxs = fl.getCtxs();
-		for (String ctx : ctxs) {
-			rules = fl.getRules(ctx);
-			for (Entry<String, String> entry : rules.entrySet()) {
-				String key = entry.getKey();
-				String value = entry.getValue();
-				out.add(key + " " + value);
-			}
+		rules = fl.getRules(ctx);
+		for (Entry<String, String> entry : rules.entrySet()) {
+//			String key = entry.getKey();
+			String value = entry.getValue();
+			out.add(value);
 		}
 		return out;
 	}
-	
+
 	public boolean addRule(String ctx, String rule) throws Exception {
 		return fl.addRule(ctx, rule);
 	}
