@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta charset="UTF-8" />
+	<meta charset="UTF-8" />
+	<meta name="description" content="Project for Uni course DKE PR" />
+	<meta name="keywords" content="..." />
+	<meta name="author"
+		content="Serhat Diken, Alexander Pabinger, Daniel Putschoegl, Andreas Zammernig" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css"
+		rel="stylesheet" />
+	<link
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+		rel="stylesheet" />
+
+	<h:outputStylesheet name="css/sb-admin.css" />
+	<h:outputStylesheet name="css/sb-admin.min.css" />
+	<h:outputStylesheet name="css/dataTables.bootstrap4.css" />
+	<h:outputStylesheet name="css/bootstrap.min.css" />
+	<h:outputStylesheet name="css/font-awesome.css" />
+	<h:outputStylesheet name="css/font-awesome.min.css" />
+	<h:outputStylesheet name="css/styles.css" />
+</h:head>
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<h:form>
+		<f:metadata>
+			<f:viewParam name="context" value="#{contextDetails.context}"></f:viewParam>
+		</f:metadata>
+
+		<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			id="mainNav">
+			<a class="navbar-brand" href="contextList.xhtml">Contexts</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Contexts"><a class="nav-link" href="contextList.xhtml">
+							<i class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Contexts</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Merge Context"><a class="nav-link"
+						href="mergeContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">Merge Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">Split Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete ParameterValue"><a class="nav-link"
+						href="deleteParameterValue.xhtml"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Delete
+								ParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete Parameter"><a class="nav-link"
+						href="deleteParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">Delete Parameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">Split Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New Context"><a class="nav-link"
+						href="newContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i> <span
+							class="nav-link-text">New Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New Parameter"><a class="nav-link"
+						href="newParameter.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">New Parameter</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="New ParameterValue"><a class="nav-link"
+						href="newParameterValue.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">New ParameterValue</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Update Context"><a class="nav-link"
+						href="updateContext.xhtml"> <i class="fa fa-fw fa-sitemap"></i>
+							<span class="nav-link-text">Update Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Parameters"><a class="nav-link"
+						href="BowlOfParameterSpagehtti.jsp"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameters</span>
+					</a></li>
+
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown"><a class="nav-link"
+						id="messagesDropdown" href="messages.xhtml"><i
+							class="fa fa-fw fa-envelope"></i> </a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+						data-target="#exampleModal">#{login.getUsername()}</a></li>
+					<li class="nav-item"><h:commandLink class="nav-link"
+							action="#{login.logout()}">
+							<i class="fa fa-fw fa-sign-out"></i>Logout
+					</h:commandLink></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Body -->
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><h:link
+							outcome="index.xhtml?faces-redirect=true" class="text-dark">Dashboard</h:link></li>
+							<li class="breadcrumb-item"><h:link
+							outcome="contextList.xhtml?faces-redirect=true" class="text-dark">Contexts</h:link></li>
+					<li class="breadcrumb-item active">Context Rules</li>
+				</ol>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-envelope"></i> Context
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr class="bg-light">
+									<th>Id</th>
+									<th>Rule</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="bg-light">
+									<th>Id</th>
+									<th>Rule</th>
+									<th></th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<c:forEach var="rule" items="#{contextDetails.rules}">
+									<tr>
+										<th style="font-weight: normal">#{rule.getKey()}</th>
+										<th style="font-weight: normal">#{rule.getValue()}</th>
+										<th style="font-weight: normal"><h:commandLink
+												action="#{contextList.delete(rule)}" class="text-dark">
+												<i class="fa fa-fw fa-trash"></i>
+											</h:commandLink></th>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+
+						<table class="table" style="border-top: none" id="dataTable" width="100%"
+							cellspacing="0">
+							<tbody>
+									<tr>
+										<th>Rule:</th>
+										<th style="font-weight: normal; vertical-align: middle;"><h:inputTextarea style=" width: 100%" value="#{contextDetails.rule}"></h:inputTextarea></th>
+										<th style="font-weight: normal">
+												<h:commandButton class="btn btn-primary"
+													action="#{contextDetails.addRule()}" value="add"></h:commandButton></th>
+									</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer small text-muted">Last Update:
+					#{currentDate}</div>
+			</div>
+		</div>
+
+		<!-- Footer-->
+		<footer class="sticky-footer">
+			<div class="container">
+				<div class="text-center">
+					<small>PR_DKE WS 2017/18</small>
+				</div>
+			</div>
+		</footer>
+	</h:form>
+</h:body>
+</html>

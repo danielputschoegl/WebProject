@@ -127,13 +127,8 @@ public class Flora2Interface {
 		return out;
 	}
 
-	public String getParameterValues() throws IOException {
-		String out = "";
-		List<String> parameterValues = fl.getParameterValues();
-		for (String element : parameterValues) {
-			out += " " + element + "\n";
-		}
-		return out;
+	public List<String> getParameterValues() throws IOException {
+		return fl.getParameterValues();
 	}
 
 	public String getParameterParameterValues(String param) throws IOException {
@@ -211,16 +206,8 @@ public class Flora2Interface {
 		return out;
 	}
 
-	public String getRules(String ctx) throws Exception {
-		String out = "";
-		HashMap<String, String> selects = fl.getRules(ctx);
-		for (Entry<String, String> entry : selects.entrySet()) {
-			String key = entry.getKey();
-			String value = entry.getValue();
-
-			out += key + " " + value;
-		}
-		return out;
+	public HashMap<String, String> getRules(String ctx) throws Exception {
+		return fl.getRules(ctx);
 	}
 
 	public String getRules() throws Exception {
@@ -251,6 +238,10 @@ public class Flora2Interface {
 			}
 		}
 		return out;
+	}
+	
+	public boolean addRule(String ctx, String rule) throws Exception {
+		return fl.addRule(ctx, rule);
 	}
 
 	public boolean delRule(String ctx, String ruleID) throws Exception {

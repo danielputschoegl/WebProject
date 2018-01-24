@@ -11,12 +11,12 @@
 	</context-param>
 	
 	<filter>
-		<filter-name>LoginFilter</filter-name>
-		<filter-class>dke.pr.g3.security.LoginFilter</filter-class>
+		<filter-name>UserFilter</filter-name>
+		<filter-class>dke.pr.g3.security.UserFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>LoginFilter</filter-name>
+		<filter-name>UserFilter</filter-name>
 		<url-pattern>/secured/*</url-pattern>
 	</filter-mapping>
 
