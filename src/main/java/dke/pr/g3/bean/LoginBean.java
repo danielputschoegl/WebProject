@@ -1,14 +1,13 @@
 package dke.pr.g3.bean;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import dke.pr.g3.db.DBConnection;
 import dke.pr.g3.entities.User;
 
-@ManagedBean(name = "login", eager = true)
+@javax.faces.bean.ManagedBean(name = "login", eager = true)
 @SessionScoped
 public class LoginBean {
 	private User user;
@@ -43,6 +42,10 @@ public class LoginBean {
 		this.loggedIn = false;
 		session.setAttribute("loginBean", this);
 		return "/login?faces-redirect=true";
+	}
+
+	public String getUserRole() {
+		return this.user.getRole().toString();
 	}
 	
 	public User getUser() {

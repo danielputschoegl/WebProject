@@ -79,6 +79,8 @@
 							class="fa fa-fw fa-envelope"></i> </a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
 						data-target="#exampleModal">#{login.getUsername()}</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+											data-target="#exampleModal">#{login.getUserRole()}</a></li>
 					<li class="nav-item"><h:commandLink class="nav-link"
 							action="#{login.logout()}">
 							<i class="fa fa-fw fa-sign-out"></i>Logout
@@ -110,11 +112,13 @@
 								<tr class="bg-light">
 									<th>Context</th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr class="bg-light">
 									<th>Context</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</tfoot>
@@ -129,6 +133,10 @@
 												action="#{contextList.delete(ctx)}" class="text-dark">
 												<i class="fa fa-fw fa-trash"></i>
 											</h:commandLink></th>
+										<th style="font-weight: normal"><h:commandLink
+												action="#{contextList.sendEditMessage(ctx, login.getUser())}" class="text-dark">
+											<i class="fa fa-fw fa-envelope"></i>
+										</h:commandLink></th>
 									</tr>
 								</c:forEach>
 							</tbody>

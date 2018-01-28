@@ -21,8 +21,8 @@ import dke.pr.g3.entities.User;
 public class DBConnection {
 
 	public static void deleteAllFromDB() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -52,8 +52,8 @@ public class DBConnection {
 	}
 
 	public static List<User> getAllUsers() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -73,8 +73,8 @@ public class DBConnection {
 	}
 
 	public static User getUserByUsername(String username) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -94,7 +94,7 @@ public class DBConnection {
 	}
 
 	public static List<User> getUsersByRole(Role role) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 			@SuppressWarnings("unchecked")
@@ -110,8 +110,8 @@ public class DBConnection {
 	}
 
 	public static User checkUserInformation(String username, String password) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -135,8 +135,8 @@ public class DBConnection {
 	}
 
 	public static void newUser(User user) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -157,7 +157,7 @@ public class DBConnection {
 	}
 
 	public static Message getMessageById(Long id) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 			return (Message) session.get(Message.class, id);
@@ -171,7 +171,7 @@ public class DBConnection {
 	}
 
 	public static List<Message> getAllMessages() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 			@SuppressWarnings("unchecked")
@@ -184,7 +184,7 @@ public class DBConnection {
 	}
 
 	public static List<MessageRecipient> getMessageListForUser(User user) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 			@SuppressWarnings("unchecked")
@@ -198,8 +198,8 @@ public class DBConnection {
 	}
 
 	public static List<Message> getAllMessagesForUser(User user) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -223,8 +223,8 @@ public class DBConnection {
 	}
 
 	public static List<Message> getAllSentMessagesForUser(User user) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -262,8 +262,8 @@ public class DBConnection {
 	}
 
 	public static void newMessage(Message msg, List<User> users, List<Role> roles) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -296,8 +296,8 @@ public class DBConnection {
 	}
 
 	public static void updateMessage(Long messageId, User currentUser, Status status, String text) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -321,8 +321,8 @@ public class DBConnection {
 	}
 
 	public static void deleteMessage(Long messageId) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();
@@ -346,8 +346,8 @@ public class DBConnection {
 	}
 
 	public static void deleteMessageForUser(User user, Long messageId) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
+		org.hibernate.Session session = HibernateUtil.getSessionFactory().openSession();
+		org.hibernate.Transaction transaction = null;
 
 		try {
 			transaction = session.beginTransaction();

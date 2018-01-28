@@ -16,7 +16,7 @@ public class Flora2Interface {
 
 	public String init() throws IOException {
 		try {
-			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr", "C:/Users/Uni/Flora-2/CBRM/bc.flr",
+			fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr", "C:/Flora-2/CBRM/bc.flr",
 					"AIMCtx", "SemNOTAMCase");
 
 			fl.setDebug(false);
@@ -93,7 +93,7 @@ public class Flora2Interface {
 	public List<String> getParametersAsList() {
 
 		try {
-			fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr", "C:/Users/Uni/Flora-2/CBRM/bc.flr",
+			fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr", "C:/Flora-2/CBRM/bc.flr",
 					"AIMCtx", "SemNOTAMCase");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

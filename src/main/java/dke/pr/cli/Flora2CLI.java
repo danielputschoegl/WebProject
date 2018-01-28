@@ -47,7 +47,7 @@ public class Flora2CLI {
 
 	public boolean start() throws IOException {
 		ProcessBuilder builder = new ProcessBuilder(
-				"C:\\Users\\Uni\\Flora-2\\flora2\\runflora.bat");
+				"C:\\Users\\Alex PC\\Flora-2\\flora2\\runflora.bat");
 		
 		builder.redirectErrorStream(true);
 

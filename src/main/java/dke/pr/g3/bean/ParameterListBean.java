@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import dke.pr.cli.Flora2Interface;
+import dke.pr.g3.entities.User;
+import dke.pr.g3.utils.Utils;
 
 @ManagedBean(name = "parameterList", eager = true)
 @ViewScoped
@@ -15,6 +17,7 @@ public class ParameterListBean {
 	private Flora2Interface flora = new Flora2Interface();
 	private List<String> parameters;
 	private String parameterName;
+	private Utils utils = new Utils();
 
 	public void delete(String parameter) throws IOException {
 		try {
@@ -24,6 +27,10 @@ public class ParameterListBean {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String sendEditMessage(String parameter, User user) {
+		return this.utils.sendEditMessage(parameter, user, "parameter");
 	}
 
 	public void add() throws IOException {

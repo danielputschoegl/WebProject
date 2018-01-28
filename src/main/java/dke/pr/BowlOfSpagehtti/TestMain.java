@@ -38,8 +38,8 @@ public class TestMain {
 		//
 		// System.out.println(abc.delParameterValue("test"));
 		// String ctxDef =
-		// "vogel:AIMCtx[Interest->aircraft,FlightPhase->arrival,EventScenario->closure,file->'C:/Users/Anderas/Flora-2/CBRM/Contexts/vogel.flr'].";
-		// String fCtx = "C:/Users/Anderas/Flora-2/CBRM/Contexts/vogel.flr";
+		// "vogel:AIMCtx[Interest->aircraft,FlightPhase->arrival,EventScenario->closure,file->'C:/Flora-2/CBRM/Contexts/vogel.flr'].";
+		// String fCtx = "C:/Flora-2/CBRM/Contexts/vogel.flr";
 		// System.out.println(abc.addCtx(ctxDef, fCtx));
 		// System.out.println(abc.delCtx("vogel", true));
 

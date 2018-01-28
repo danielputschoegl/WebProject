@@ -7,12 +7,12 @@ import java.util.Arrays;
 public class testDelParameterValue {
 
 	public static void main(String[] args) throws Exception {
-		CBRInterface fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
-				"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+		CBRInterface fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr",
+				"C:/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
 
-		//für putschi
-//		CBRInterface fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr",
-//				"C:/Users/Uni/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+		//fï¿½r putschi
+//		CBRInterface fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr",
+//				"C:/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
 		System.out.println("\n\nUnusedParameterValues:     " + fl.detUnusedParameterValues());
 		System.out.println("\n\ndelVal seaplane:     " + fl.delParameterValue("seaplane"));
 		Thread.sleep(1000);

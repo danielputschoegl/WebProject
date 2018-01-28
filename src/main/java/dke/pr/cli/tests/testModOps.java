@@ -7,12 +7,12 @@ import dke.pr.cli.CBRInterface;
 public class testModOps {
 
 	public static void main(String[] args) throws Exception {
-		CBRInterface fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
-				"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+		CBRInterface fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr",
+				"C:/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
 
-		//für putschi
-//		CBRInterface fl = new CBRInterface("C:/Users/Uni/Flora-2/CBRM/ctxModelAIM.flr",
-//				"C:/Users/Uni/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+		//fï¿½r putschi
+//		CBRInterface fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr",
+//				"C:/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
 
 		System.out.println("addRule: "
 				+ fl.addRule("helicopter_allFlightPhases_obstruction", "@!{RX}"
@@ -28,8 +28,8 @@ public class testModOps {
 		System.out
 				.println("\n\naddCtx:     "
 						+ fl.addCtx(
-								"aircraft_arrival_closure:AIMCtx[Interest->aircraft,FlightPhase->arrival,EventScenario->closure,file->'/home/fburgstaller/flora2/CBRM/Contexts/aircraft_arrival_closure.flr'].",
-								"/home/fburgstaller/flora2/CBRM/Contexts/aircraft_arrival_closure.flr"));
+								"aircraft_arrival_closure:AIMCtx[Interest->aircraft,FlightPhase->arrival,EventScenario->closure,file->'C:/Flora-2/CBRM/Contexts/aircraft_arrival_closure.flr'].",
+								"C:/Flora-2/CBRM/Contexts/aircraft_arrival_closure.flr"));
 		Thread.sleep(1000);
 		fl.restart();
 		System.out.println("Contexts:   " + fl.getCtxs() + "\nTest: "
@@ -231,8 +231,8 @@ public class testModOps {
 		// System.out
 		// .println("\naddCtx:     "
 		// + fl.addCtx(
-		// "test:AIMCtx[MeteorologicalCondition->allMeteorologicalConditions,Test->allTests,file->'/home/fburgstaller/flora2/CBRM/Contexts/aircraft_arrival_closure.flr'].",
-		// "/home/fburgstaller/flora2/CBRM/Contexts/aircraft_arrival_closure.flr"));
+		// "test:AIMCtx[MeteorologicalCondition->allMeteorologicalConditions,Test->allTests,file->'C:/Flora-2/CBRM/Contexts/aircraft_arrival_closure.flr'].",
+		// "C:/Flora-2/CBRM/Contexts/aircraft_arrival_closure.flr"));
 		// Thread.sleep(1000);
 		// fl.restart();
 		// System.out.println("Contexts:   " + fl.getCtxs() + "\nTest: "
