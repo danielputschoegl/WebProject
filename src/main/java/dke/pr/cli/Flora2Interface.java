@@ -1,12 +1,9 @@
 package dke.pr.cli;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import dke.pr.cli.CBRInterface;
@@ -39,6 +36,10 @@ public class Flora2Interface {
 		return out;
 	}
 
+	public List<String[]> getISpecInfo(String iSpec) throws IOException {
+		return fl.getISpecInfo(iSpec);
+	}
+
 	public String getParameterValuesHiearchy() throws IOException {
 		String out = "";
 		List<String[]> hierarchy;
@@ -55,6 +56,8 @@ public class Flora2Interface {
 		}
 		return out;
 	}
+	
+	
 
 	public boolean delParameter(String pName) throws IOException {
 		boolean out = false;
@@ -156,13 +159,16 @@ public class Flora2Interface {
 		return out;
 	}
 
-	public String getInterestSpecClass() throws IOException {
-		String out = "";
-		List<String[]> interestSpecClass = fl.getInterestSpecClass();
-		for (String[] element : interestSpecClass) {
-			out += " " + element[0] + " unter " + element[1] + "\n";
-		}
-		return out;
+	public List<String[]> getInterestSpecClass() throws IOException {
+		return fl.getInterestSpecClass();
+	}
+	
+	public List<String> readTargetModule(String targetModule) throws IOException {
+		return fl.readTargetModule(targetModule);
+	}
+	
+	public List<String> detRelevantCtxs(String bc) throws IOException {
+		return fl.detRelevantCtxs(bc);
 	}
 
 	public String getNOTAMS() throws IOException {
@@ -244,12 +250,15 @@ public class Flora2Interface {
 		return out;
 	}
 
-	public String getISpecs() throws IOException {
-		String out = "";
-		List<String> iSpecs = fl.getISpecs();
-		for (String element : iSpecs) {
-			out += " " + element + "\n";
-		}
-		return out;
+	public List<String> getISpecs() throws IOException {
+		return fl.getISpecs();
+	}
+
+	public List<String[]> getNOTAMInfo(String notam) throws IOException {
+		return fl.getNOTAMInfo(notam);
+	}
+
+	public List<String> getNOTAMSAsList() throws IOException {
+		return fl.getNOTAMS();
 	}
 }

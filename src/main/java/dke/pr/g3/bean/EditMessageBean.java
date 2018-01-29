@@ -15,7 +15,6 @@ import dke.pr.g3.model.Status;
 @ManagedBean(name = "editMessage", eager = true)
 @ViewScoped
 public class EditMessageBean {
-	private static final long serialVersionUID = 1L;
 	private Long id = new Long(0);
 	private Message message;
 	private String text;

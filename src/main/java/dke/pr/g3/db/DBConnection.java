@@ -166,7 +166,6 @@ public class DBConnection {
 		} finally {
 			session.close();
 		}
-
 		return null;
 	}
 

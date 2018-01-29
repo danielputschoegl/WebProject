@@ -60,5 +60,4 @@ public class ParameterPassingBean {
 	public void setSecondContext(String secondContext) {
 		this.secondContext = secondContext;
 	}
-	
 }

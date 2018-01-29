@@ -1,18 +1,16 @@
 package dke.pr.g3.bean;
 
-import java.util.Iterator;
-import java.util.List;
+import java.io.Serializable;
 import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import dke.pr.cli.Flora2Interface;
 
 @ManagedBean(name = "contextDetails", eager = true)
 @ViewScoped
-public class ContextDetailsBean {
+public class ContextDetailsBean implements Serializable{
+
+	private static final long serialVersionUID = -4754936333401369656L;
 	private Flora2Interface flora = new Flora2Interface();
 	private Map<String, String> rules;
 	private String context;
@@ -23,7 +21,6 @@ public class ContextDetailsBean {
 			flora.init();
 			this.rules = flora.getRules(this.context);
 		}
-		
 		return this.rules;
 	}
 	
@@ -55,4 +52,3 @@ public class ContextDetailsBean {
 		this.rules = flora.getRules(this.context);
 	}
 }
-	

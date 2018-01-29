@@ -1,19 +1,20 @@
 package dke.pr.g3.bean;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import dke.pr.cli.Flora2Interface;
 import dke.pr.g3.entities.User;
 import dke.pr.g3.utils.Utils;
 
 @ManagedBean(name = "contextList", eager = true)
 @ViewScoped
-public class ContextListBean {
-    private Flora2Interface flora = new Flora2Interface();
+public class ContextListBean implements Serializable {
+
+	private static final long serialVersionUID = -6762643095047566910L;
+	private Flora2Interface flora = new Flora2Interface();
     private List<String> contexts;
     private List<String> parameters;
     private List<String> parameterValues;
@@ -29,7 +30,6 @@ public class ContextListBean {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return "delContext?faces-redirect=true";
     }
 
@@ -42,7 +42,6 @@ public class ContextListBean {
             flora.init();
             this.contexts = flora.getCtxs();
         }
-
         return this.contexts;
     }
 
@@ -51,7 +50,6 @@ public class ContextListBean {
             flora.init();
             this.parameters = flora.getParametersAsList();
         }
-
         return this.parameters;
     }
 
@@ -60,7 +58,6 @@ public class ContextListBean {
             flora.init();
             this.parameterValues = flora.getParameterValues();
         }
-
         return this.parameterValues;
     }
 

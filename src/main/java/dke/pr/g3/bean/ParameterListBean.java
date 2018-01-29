@@ -1,9 +1,9 @@
 package dke.pr.g3.bean;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -13,7 +13,9 @@ import dke.pr.g3.utils.Utils;
 
 @ManagedBean(name = "parameterList", eager = true)
 @ViewScoped
-public class ParameterListBean {
+public class ParameterListBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private Flora2Interface flora = new Flora2Interface();
 	private List<String> parameters;
 	private String parameterName;
