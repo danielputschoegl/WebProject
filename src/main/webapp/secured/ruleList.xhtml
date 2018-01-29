@@ -60,7 +60,7 @@
                     <li class="nav-item" data-toggle="tooltip" data-placement="right"
                         title="Rules"><a class="nav-link"
                                          href="ruleList.xhtml"> <i
-                            class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Rules</span>
+                            class="fxa fa-fw fa-sitemap"></i> <span class="nav-link-text">Rules</span>
                     </a></li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right"
                         title="Delete ParameterValue"><a class="nav-link"
@@ -117,29 +117,26 @@
                         <table class="table table-bordered" id="dataTable" width="100%"
                                cellspacing="0">
                             <thead>
-                            <tr class="bg-light">
-                                <th>Context</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr class="bg-light">
-                                <th>Context</th>
-                                <th></th>
-                            </tr>
-                            </tfoot>
+								<tr class="bg-light">
+									<th>Id</th>
+									<th>Rule</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr class="bg-light">
+									<th>Id</th>
+									<th>Rule</th>
+									<th></th>
+								</tr>
+							</tfoot>
                             <tbody>
-                            <c:forEach var="rule" items="#{ruleList.getRulesAsList()}">
-                                <tr>
-                                    <th style="font-weight: normal">
-                                        <f:param name="context" value="#{rule}"></f:param>
-                                        <!--<th style="font-weight: normal"><h:commandLink
-                                                action="#{ruleList.delete(rule, ruleId)}" class="text-dark">
-                                            <i class="fa fa-fw fa-trash"></i>
-                                        </h:commandLink></th>-->
-                                    </th>
-                                </tr>
-                            </c:forEach>
+                            <c:forEach var="rule" items="#{ruleList.rules}">
+									<tr>
+										<th style="font-weight: normal">#{rule.getKey()}</th>
+										<th style="font-weight: normal">#{rule.getValue()}</th>
+									</tr>
+								</c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -148,7 +145,6 @@
                     #{currentDate}</div>
             </div>
         </div>
-
 
         <!-- Footer-->
         <footer class="sticky-footer">

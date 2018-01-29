@@ -65,7 +65,7 @@ public class ContextListBean {
     }
 
     public void addContext() throws IOException {
-        String path = "C:/Flora-2/CBRM/Contexts/";
+        String path = "C:/Users/Anderas/Flora-2/CBRM/Contexts/";
 
         flora.init();
         String ctxDef = this.contextName

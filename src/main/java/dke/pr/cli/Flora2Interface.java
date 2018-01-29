@@ -16,8 +16,8 @@ public class Flora2Interface {
 
 	public String init() throws IOException {
 		try {
-			fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr", "C:/Flora-2/CBRM/bc.flr",
-					"AIMCtx", "SemNOTAMCase");
+			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
+					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
 
 			fl.setDebug(false);
 		} catch (IOException e) {
@@ -93,8 +93,9 @@ public class Flora2Interface {
 	public List<String> getParametersAsList() {
 
 		try {
-			fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr", "C:/Flora-2/CBRM/bc.flr",
-					"AIMCtx", "SemNOTAMCase");
+			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
+					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -106,7 +107,6 @@ public class Flora2Interface {
 		try {
 			parameters = fl.getParameters();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -228,7 +228,6 @@ public class Flora2Interface {
 		HashMap<String, String> rules;
 		rules = fl.getRules(ctx);
 		for (Entry<String, String> entry : rules.entrySet()) {
-//			String key = entry.getKey();
 			String value = entry.getValue();
 			out.add(value);
 		}

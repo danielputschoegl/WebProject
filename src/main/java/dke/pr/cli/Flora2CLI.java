@@ -33,8 +33,7 @@ public class Flora2CLI {
 	private PrintWriter pw;
 
 	private final String INPUT_REQUEST = "flora2 ?-";
-	private final Pattern REGEX_VAR = Pattern
-			.compile("(?<=\\?\\w{1,20}\\s=\\s).*");
+	private final Pattern REGEX_VAR = Pattern.compile("(?<=\\?\\w{1,20}\\s=\\s).*");
 
 	/**
 	 * Flora2 located at /opt/Flora-2/flora2/runflora
@@ -46,9 +45,8 @@ public class Flora2CLI {
 	}
 
 	public boolean start() throws IOException {
-		ProcessBuilder builder = new ProcessBuilder(
-				"C:\\Users\\Alex PC\\Flora-2\\flora2\\runflora.bat");
-		
+		ProcessBuilder builder = new ProcessBuilder("C:\\Users\\Anderas\\Flora-2\\flora2\\runflora.bat");
+
 		builder.redirectErrorStream(true);
 
 		process = builder.start();
@@ -76,8 +74,7 @@ public class Flora2CLI {
 					break;
 				line.append((char) i);
 			} else {
-				if (line.length() != 0
-						&& !line.toString().matches("\\d+ solution.*")
+				if (line.length() != 0 && !line.toString().matches("\\d+ solution.*")
 						&& !line.toString().matches("^Times.*")) {
 					output.append(line);
 					output.append("\n");

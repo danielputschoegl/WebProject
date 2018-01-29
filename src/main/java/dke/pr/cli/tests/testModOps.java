@@ -10,10 +10,6 @@ public class testModOps {
 		CBRInterface fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr",
 				"C:/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
 
-		//f�r putschi
-//		CBRInterface fl = new CBRInterface("C:/Flora-2/CBRM/ctxModelAIM.flr",
-//				"C:/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
-
 		System.out.println("addRule: "
 				+ fl.addRule("helicopter_allFlightPhases_obstruction", "@!{RX}"
 						+ System.lineSeparator() + "test:-true."));
