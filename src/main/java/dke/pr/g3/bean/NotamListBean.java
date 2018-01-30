@@ -16,21 +16,6 @@ public class NotamListBean {
 	private List<String> notams;
 	private String notamName;
 
-	// public void delete(String notam) throws IOException {
-	// try {
-	// flora.init();
-	// flora.delParameter(parameter);
-	// this.notams = flora.getNOTAMSAsList();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-
-	// public String getNotamInfo(String notam) throws IOException {
-	// flora.init();
-	// return flora.getNOTAMInfo(notam);
-	// }
-
 	public List<String> getNotams() throws IOException {
 		if (this.notams == null) {
 			flora.init();

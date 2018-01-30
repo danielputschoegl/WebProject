@@ -8,14 +8,14 @@ import dke.pr.cli.Flora2Interface;
 
 @ManagedBean(name = "contextDetails", eager = true)
 @ViewScoped
-public class ContextDetailsBean implements Serializable{
+public class ContextDetailsBean implements Serializable {
 
 	private static final long serialVersionUID = -4754936333401369656L;
 	private Flora2Interface flora = new Flora2Interface();
 	private Map<String, String> rules;
 	private String context;
 	private String rule;
-	
+
 	public Map<String, String> getRules() throws Exception {
 		if (this.rules == null) {
 			flora.init();
@@ -23,11 +23,15 @@ public class ContextDetailsBean implements Serializable{
 		}
 		return this.rules;
 	}
-	
+
 	public void deleteRule(String id) throws Exception {
-		flora.init();
-		flora.delRule(this.context, id);
-		this.rules = flora.getRules(this.context);
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			flora.init();
+			flora.delRule(this.context, id);
+			this.rules = flora.getRules(this.context);
+			flora.writeFlag("open");
+		}
 	}
 
 	public String getRule() {
@@ -37,7 +41,7 @@ public class ContextDetailsBean implements Serializable{
 	public void setRule(String rule) {
 		this.rule = rule;
 	}
-	
+
 	public String getContext() {
 		return context;
 	}
@@ -45,10 +49,14 @@ public class ContextDetailsBean implements Serializable{
 	public void setContext(String context) {
 		this.context = context;
 	}
-	
+
 	public void addRule() throws Exception {
-		flora.addRule(this.context, this.rule);
-		this.rule = null;
-		this.rules = flora.getRules(this.context);
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			flora.addRule(this.context, this.rule);
+			this.rule = null;
+			this.rules = flora.getRules(this.context);
+			flora.writeFlag("open");
+		}
 	}
 }

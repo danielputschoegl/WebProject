@@ -1,5 +1,6 @@
 package dke.pr.g3.bean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,20 +60,29 @@ public class SplitRulesBean {
 	public void setSecondContext(String secondContext) {
 		this.secondContext = secondContext;
 	}
-	
-	public void addFirstRule(String rule) {
-		if(this.firstRules.contains(rule)) {
-			this.firstRules.remove(rule);
-		} else {
-			this.firstRules.add(rule);
+
+	public void addFirstRule(String rule) throws IOException {
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			if (this.firstRules.contains(rule)) {
+				this.firstRules.remove(rule);
+			} else {
+				this.firstRules.add(rule);
+			}
+			flora.writeFlag("open");
 		}
+
 	}
-	
-	public void addSecondRule(String rule) {
-		if(this.secondRules.contains(rule)) {
-			this.secondRules.remove(rule);
-		} else {
-			this.secondRules.add(rule);
+
+	public void addSecondRule(String rule) throws IOException {
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			if (this.secondRules.contains(rule)) {
+				this.secondRules.remove(rule);
+			} else {
+				this.secondRules.add(rule);
+			}
+			flora.writeFlag("open");
 		}
 	}
 }

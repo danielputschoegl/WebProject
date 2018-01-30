@@ -15,16 +15,18 @@ public class RuleListBean {
 	private Map<String, String> rules;
 
 	public void addRule(String ctx) throws Exception {
-		String path = "C:/Users/Anderas/Flora-2/CBRM/Contexts/";
-
-		flora.init();
-		try {
-			flora.addRule(ctx, this.ruleName);
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			flora.init();
+			try {
+				flora.addRule(ctx, this.ruleName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			this.rules = this.getRules();
+			this.ruleName = null;
+			flora.writeFlag("open");
 		}
-		this.rules = this.getRules();
-		this.ruleName = null;
 	}
 
 	public Map<String, String> getRules() throws Exception {

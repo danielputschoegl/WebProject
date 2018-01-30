@@ -15,16 +15,20 @@ public class MergeContextBean {
 	private List<String> contexts;
 	private String firstContext;
 	private String secondContext;
-	
+
 	public void merge() throws Exception {
-		flora.init();
-		List<String> rules = flora.getRulesAsList(this.firstContext);
-		for(String rule : rules) {
-			flora.addRule(secondContext, rule);
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			flora.init();
+			List<String> rules = flora.getRulesAsList(this.firstContext);
+			for (String rule : rules) {
+				flora.addRule(secondContext, rule);
+			}
+			flora.delCtx(firstContext, true);
+			this.firstContext = null;
+			this.secondContext = null;
+			flora.writeFlag("open");
 		}
-		flora.delCtx(firstContext, true);
-		this.firstContext = null;
-		this.secondContext = null;
 	}
 
 	public List<String> getContexts() throws IOException {

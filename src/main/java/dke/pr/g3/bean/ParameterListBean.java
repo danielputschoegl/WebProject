@@ -1,7 +1,14 @@
 package dke.pr.g3.bean;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -22,12 +29,12 @@ public class ParameterListBean implements Serializable {
 	private Utils utils = new Utils();
 
 	public void delete(String parameter) throws IOException {
-		try {
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
 			flora.init();
 			flora.delParameter(parameter);
 			this.parameters = flora.getParametersAsList();
-		} catch (Exception e) {
-			e.printStackTrace();
+			flora.writeFlag("open");
 		}
 	}
 
@@ -36,13 +43,17 @@ public class ParameterListBean implements Serializable {
 	}
 
 	public void add() throws IOException {
-		flora.init();
-		String[] parser = parameterName.split(",");
-		if (parser[0] != null && parser[1] != null && parser[2] != null) {
-			flora.addParameter(parser[0], parser[1], parser[2]);
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			flora.init();
+			String[] parser = parameterName.split(",");
+			if (parser[0] != null && parser[1] != null && parser[2] != null) {
+				flora.addParameter(parser[0], parser[1], parser[2]);
+			}
+			this.parameterName = null;
+			this.parameters = flora.getParametersAsList();
+			flora.writeFlag("open");
 		}
-		this.parameterName = null;
-		this.parameters = flora.getParametersAsList();
 	}
 
 	public List<String> getParameters() throws IOException {
@@ -60,5 +71,4 @@ public class ParameterListBean implements Serializable {
 	public void setParameterName(String parameterName) {
 		this.parameterName = parameterName;
 	}
-
 }

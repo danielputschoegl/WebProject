@@ -45,6 +45,7 @@ public class Flora2CLI {
 	}
 
 	public boolean start() throws IOException {
+		// change this path
 		ProcessBuilder builder = new ProcessBuilder("C:\\Users\\Anderas\\Flora-2\\flora2\\runflora.bat");
 
 		builder.redirectErrorStream(true);

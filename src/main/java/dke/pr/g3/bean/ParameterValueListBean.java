@@ -41,9 +41,13 @@ public class ParameterValueListBean implements Serializable {
 	}
 
 	public void deleteParameterValue(String parameterValue) throws IOException {
-		flora.init();
-		flora.delParameterValue(parameterValue);
-		this.parameters = flora.getParametersAsList();
+		if (flora.readFlag()) {
+			flora.writeFlag("closed");
+			flora.init();
+			flora.delParameterValue(parameterValue);
+			this.parameters = flora.getParametersAsList();
+			flora.writeFlag("open");
+		}
 	}
 
 	public String getName() {

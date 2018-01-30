@@ -1,5 +1,9 @@
 package dke.pr.cli;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,15 +14,41 @@ import dke.pr.cli.CBRInterface;
 
 public class Flora2Interface {
 	CBRInterface fl;
+	// change paths here:
+	String flagFile = "C:/Users/Anderas/DKEPR/WebProject/flag.txt";
+	String contextPath = "C:/Users/Anderas/Flora-2/CBRM/Contexts/";
+	String fCtxModel = "C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr";
+	String fBc = "C:/Users/Anderas/Flora-2/CBRM/bc.flr";
+
 	public String init() throws IOException {
 		try {
-			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
-					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
+			fl = new CBRInterface(fCtxModel, fBc, "AIMCtx", "SemNOTAMCase");
 			fl.setDebug(false);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return "ready";
+	}
+
+	public String getContextPath() {
+		return contextPath;
+	}
+
+	public boolean readFlag() throws IOException {
+		String flag = "";
+		BufferedReader br = new BufferedReader(new FileReader(flagFile));
+		flag = br.readLine();
+		br.close();
+		return flag.equals("open");
+	}
+
+	public void writeFlag(String value) throws IOException {
+		FileWriter fw = new FileWriter(flagFile);
+		BufferedWriter bw = new BufferedWriter(fw);
+		bw.write("value");
+		bw.flush();
+		bw.close();
+		fw.close();
 	}
 
 	public List<String> getCtxs() throws IOException {
@@ -52,7 +82,7 @@ public class Flora2Interface {
 		}
 		return out;
 	}
-	
+
 	public boolean delParameter(String pName) throws IOException {
 		boolean out = false;
 		out = fl.delParameter(pName);
@@ -89,8 +119,8 @@ public class Flora2Interface {
 
 	public List<String> getParametersAsList() throws IOException {
 		List<String> parameters = null;
-			parameters = fl.getParameters();
-			return parameters;
+		parameters = fl.getParameters();
+		return parameters;
 	}
 
 	public boolean restart() throws IOException {
@@ -139,11 +169,11 @@ public class Flora2Interface {
 	public List<String[]> getInterestSpecClass() throws IOException {
 		return fl.getInterestSpecClass();
 	}
-	
+
 	public List<String> readTargetModule(String targetModule) throws IOException {
 		return fl.readTargetModule(targetModule);
 	}
-	
+
 	public List<String> detRelevantCtxs(String bc) throws IOException {
 		return fl.detRelevantCtxs(bc);
 	}
