@@ -13,7 +13,7 @@ import dke.pr.g3.utils.Utils;
 
 @ManagedBean(name = "parameterList", eager = true)
 @ViewScoped
-public class ParameterListBean implements Serializable{
+public class ParameterListBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Flora2Interface flora = new Flora2Interface();
@@ -37,7 +37,10 @@ public class ParameterListBean implements Serializable{
 
 	public void add() throws IOException {
 		flora.init();
-		flora.addParameter(parameterName);
+		String[] parser = parameterName.split(",");
+		if (parser[0] != null && parser[1] != null && parser[2] != null) {
+			flora.addParameter(parser[0], parser[1], parser[2]);
+		}
 		this.parameterName = null;
 		this.parameters = flora.getParametersAsList();
 	}
@@ -57,5 +60,5 @@ public class ParameterListBean implements Serializable{
 	public void setParameterName(String parameterName) {
 		this.parameterName = parameterName;
 	}
-	
+
 }

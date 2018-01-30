@@ -35,67 +35,74 @@
 </h:head>
 <h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <h:form>
+	
+<!-- Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			id="mainNav">
+			<a class="navbar-brand" href="index.xhtml">Dashboard</a>
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-             id="mainNav">
-            <a class="navbar-brand" href="index.xhtml">Dashboard</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button"
-                    data-toggle="collapse" data-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right"
-                        title="Contexts"><a class="nav-link" href="contextList.xhtml">
-                        <i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
-                    </a></li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right"
-                        title="Parameters"><a class="nav-link" href="parameterList.xhtml">
-                        <i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
-                    </a></li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right"
-                        title="Rules"><a class="nav-link"
-                                         href="ruleList.xhtml"> <i
-                            class="fxa fa-fw fa-sitemap"></i> <span class="nav-link-text">Rules</span>
-                    </a></li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right"
-                        title="Delete ParameterValue"><a class="nav-link"
-                                                         href="parameterValueList.xhtml"> <i
-                            class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
-                    </a></li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right"
-                        title="Merge Context"><a class="nav-link"
-                                                 href="mergeContext.xhtml"> <i class="fa fa-fw fa-compress"></i>
-                        <span class="nav-link-text">Merge Context</span>
-                    </a></li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right"
-                        title="Split Context"><a class="nav-link"
-                                                 href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
-                        <span class="nav-link-text">Split Context</span>
-                    </a></li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" id="messagesDropdown" href="messages.xhtml">
-                            <i class="fa fa-fw fa-envelope"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">#{login.getUsername()}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">#{login.getUserRole()}</a>
-                    </li>
-                    <li class="nav-item"><h:commandLink class="nav-link" action="#{login.logout()}">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout
-                    </h:commandLink></li>
-                </ul>
-            </div>
-        </nav>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Contexts"><a class="nav-link" href="contextList.xhtml">
+							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Rules"><a class="nav-link"
+										 href="ruleList.xhtml"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Rules</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Parameters"><a class="nav-link" href="parameterList.xhtml">
+							<i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Delete ParameterValue"><a class="nav-link"
+						href="parameterValueList.xhtml"> <i
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Merge Context"><a class="nav-link"
+						href="mergeContext.xhtml"> <i class="fa fa-fw fa-compress"></i>
+							<span class="nav-link-text">Merge Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Split Context"><a class="nav-link"
+						href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
+							<span class="nav-link-text">Split Context</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Interest Specifications"><a class="nav-link"
+						href="iSpecList.xhtml"> <i class="fa fa-fw fa-scissors"></i>
+							<span class="nav-link-text">Interest Specifications</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="NOTAMS"><a class="nav-link"
+						href="notamList.xhtml"> <i class="fa fa-fw fa-scissors"></i>
+							<span class="nav-link-text">NOTAMS</span>
+					</a></li>
+				</ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item dropdown"><a class="nav-link"
+						id="messagesDropdown" href="messages.xhtml"><i
+							class="fa fa-fw fa-envelope"></i> </a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+						data-target="#exampleModal">#{login.getUsername()}</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="modal"
+											data-target="#exampleModal">#{login.getUserRole()}</a></li>
+					<li class="nav-item"><h:commandLink class="nav-link"
+							action="#{login.logout()}">
+							<i class="fa fa-fw fa-sign-out"></i>Logout
+					</h:commandLink></li>
+				</ul>
+			</div>
+		</nav>
 
         <!-- Body -->
         <div class="content-wrapper">

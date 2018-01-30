@@ -32,7 +32,6 @@ public class MergeContextBean {
 			flora.init();
 			this.contexts = flora.getCtxs();
 		}
-
 		return this.contexts;
 	}
 

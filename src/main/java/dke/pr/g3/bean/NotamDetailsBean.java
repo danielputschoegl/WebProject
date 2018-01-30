@@ -10,7 +10,6 @@ import dke.pr.cli.Flora2Interface;
 @ManagedBean(name = "notamDetails", eager = true)
 @ViewScoped
 public class NotamDetailsBean {
-	// gibt notam nicht mit
 
 	private Flora2Interface flora = new Flora2Interface();
 	private Map<String, String> notamDetails;

@@ -10,12 +10,10 @@ import dke.pr.cli.CBRInterface;
 
 public class Flora2Interface {
 	CBRInterface fl;
-
 	public String init() throws IOException {
 		try {
 			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
 					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
-
 			fl.setDebug(false);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -45,10 +43,8 @@ public class Flora2Interface {
 		List<String[]> hierarchy;
 		List<String> parameterValues = fl.getParameters();
 		for (String parameterValue : parameterValues) {
-			// {source: "Oracle", target: "Google", type: "suit"},
 			hierarchy = fl.getParameterValuesHiearchy(parameterValue);
 			for (String[] element : hierarchy) {
-				// {source: "Oracle", target: "Google", type: "suit"},
 				out += "{source: \"" + element[1] + "\", target: \"" + element[0] + "\", type: \"suit\"},";
 				System.out.println("{source: \"" + element[0] + "\", target: \"" + element[1] + "\", type: \"suit\"},");
 				System.out.println();
@@ -57,8 +53,6 @@ public class Flora2Interface {
 		return out;
 	}
 	
-	
-
 	public boolean delParameter(String pName) throws IOException {
 		boolean out = false;
 		out = fl.delParameter(pName);
@@ -93,27 +87,10 @@ public class Flora2Interface {
 		return out;
 	}
 
-	public List<String> getParametersAsList() {
-
-		try {
-			fl = new CBRInterface("C:/Users/Anderas/Flora-2/CBRM/ctxModelAIM.flr",
-					"C:/Users/Anderas/Flora-2/CBRM/bc.flr", "AIMCtx", "SemNOTAMCase");
-
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		fl.setDebug(false);
+	public List<String> getParametersAsList() throws IOException {
 		List<String> parameters = null;
-
-		try {
 			parameters = fl.getParameters();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return parameters;
+			return parameters;
 	}
 
 	public boolean restart() throws IOException {
@@ -183,12 +160,6 @@ public class Flora2Interface {
 	public boolean addParameter(String pName, String rootValue, String detParamDef) throws IOException {
 		boolean out = false;
 		out = fl.addParameter(pName, rootValue, detParamDef);
-		return out;
-	}
-
-	public boolean addParameter(String name) throws IOException {
-		boolean out = false;
-		out = fl.addParameter(name, "all" + name, name + "[detParamValue(?bc)->?v]:-?v=all" + name + ".");
 		return out;
 	}
 

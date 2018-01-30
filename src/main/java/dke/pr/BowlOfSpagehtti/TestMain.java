@@ -1,9 +1,6 @@
 package dke.pr.BowlOfSpagehtti;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
 import dke.pr.cli.CBRInterface;
 import dke.pr.cli.Flora2Interface;
 
@@ -38,8 +35,6 @@ public class TestMain {
 				System.out.println();
 			}
 		}
-
-		
 		
 		System.out.println(abc.getISpecs());
 		List<String[]> interestSpecClasses = abc.getInterestSpecClass();

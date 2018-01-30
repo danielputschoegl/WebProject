@@ -26,8 +26,10 @@ public class SplitRulesBean {
 	}
 
 	public List<String> getRules() throws Exception {
-		if (this.rules == null && this.rootContext != null) {
+		if (this.rules == null && this.rootContext != null && this.rootContext != "") {
 			flora.init();
+			this.rules = new ArrayList<String>();
+			System.out.println(rootContext);
 			this.rules = flora.getRulesAsList(rootContext);
 		}
 

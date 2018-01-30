@@ -41,6 +41,7 @@
 			listener="#{splitRules.init(parameterPassing.getRootContext(), parameterPassing.getFirstContext(), parameterPassing.getSecondContext())}" />
 	</f:metadata>
 	<h:form>
+	
 		<!-- Navigation-->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 			id="mainNav">
@@ -57,6 +58,10 @@
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Contexts"><a class="nav-link" href="contextList.xhtml">
 							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Rules"><a class="nav-link" href="ruleList.xhtml">
+							<i class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Rules</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Parameters"><a class="nav-link"
@@ -79,6 +84,15 @@
 						href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
 							<span class="nav-link-text">Split Context</span>
 					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Interest Specifications"><a class="nav-link"
+						href="iSpecList.xhtml"> <i class="fa fa-fw fa-scissors"></i> <span
+							class="nav-link-text">Interest Specifications</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="NOTAMS"><a class="nav-link" href="notamList.xhtml">
+							<i class="fa fa-fw fa-scissors"></i> <span class="nav-link-text">NOTAMS</span>
+					</a></li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown"><a class="nav-link"
@@ -87,7 +101,7 @@
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
 						data-target="#exampleModal">#{login.getUsername()}</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
-											data-target="#exampleModal">#{login.getUserRole()}</a></li>
+						data-target="#exampleModal">#{login.getUserRole()}</a></li>
 					<li class="nav-item"><h:commandLink class="nav-link"
 							action="#{login.logout()}">
 							<i class="fa fa-fw fa-sign-out"></i>Logout
@@ -120,6 +134,10 @@
 						<table class="table" style="border-top: none" id="dataTable"
 							width="100%" cellspacing="0">
 							<tbody>
+								<tr>
+									<th>first context</th>
+									<th>second context</th>
+								</tr>
 								<tr>
 									<th style="font-weight: normal; vertical-align: middle"><p:scrollPanel
 											style="width:500px; height:200px; margin-left: 1%;"

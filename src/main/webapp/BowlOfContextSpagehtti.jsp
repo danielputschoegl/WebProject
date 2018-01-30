@@ -44,7 +44,7 @@ text {
 		var links = [
 		
 	<%JSONGenerator spagehtti = new JSONGenerator();%>
-	<%=spagehtti.getJSON()%>
+	<%=spagehtti.getContextsAsJSON()%>
 		];
 
 		var nodes = {};

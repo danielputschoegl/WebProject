@@ -54,13 +54,19 @@
 							<i class="fa fa-fw fa-archive"></i> <span class="nav-link-text">Contexts</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
-						title="Parameters"><a class="nav-link" href="parameterList.xhtml">
-							<i class="fa fa-fw fa-file-code-o"></i> <span class="nav-link-text">Parameters</span>
+						title="Rules"><a class="nav-link" href="ruleList.xhtml">
+							<i class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Rules</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Parameters"><a class="nav-link"
+						href="parameterList.xhtml"> <i class="fa fa-fw fa-file-code-o"></i>
+							<span class="nav-link-text">Parameters</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Delete ParameterValue"><a class="nav-link"
 						href="parameterValueList.xhtml"> <i
-							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter Values</span>
+							class="fa fa-fw fa-sitemap"></i> <span class="nav-link-text">Parameter
+								Values</span>
 					</a></li>
 					<li class="nav-item" data-toggle="tooltip" data-placement="right"
 						title="Merge Context"><a class="nav-link"
@@ -72,6 +78,15 @@
 						href="splitContext.xhtml"> <i class="fa fa-fw fa-scissors"></i>
 							<span class="nav-link-text">Split Context</span>
 					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="Interest Specifications"><a class="nav-link"
+						href="iSpecList.xhtml"> <i class="fa fa-fw fa-scissors"></i> <span
+							class="nav-link-text">Interest Specifications</span>
+					</a></li>
+					<li class="nav-item" data-toggle="tooltip" data-placement="right"
+						title="NOTAMS"><a class="nav-link" href="notamList.xhtml">
+							<i class="fa fa-fw fa-scissors"></i> <span class="nav-link-text">NOTAMS</span>
+					</a></li>
 				</ul>
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item dropdown"><a class="nav-link"
@@ -80,7 +95,7 @@
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
 						data-target="#exampleModal">#{login.getUsername()}</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
-											data-target="#exampleModal">#{login.getUserRole()}</a></li>
+						data-target="#exampleModal">#{login.getUserRole()}</a></li>
 					<li class="nav-item"><h:commandLink class="nav-link"
 							action="#{login.logout()}">
 							<i class="fa fa-fw fa-sign-out"></i>Logout
@@ -134,9 +149,10 @@
 												<i class="fa fa-fw fa-trash"></i>
 											</h:commandLink></th>
 										<th style="font-weight: normal"><h:commandLink
-												action="#{contextList.sendEditMessage(ctx, login.getUser())}" class="text-dark">
-											<i class="fa fa-fw fa-envelope"></i>
-										</h:commandLink></th>
+												action="#{contextList.sendEditMessage(ctx, login.getUser())}"
+												class="text-dark">
+												<i class="fa fa-fw fa-envelope"></i>
+											</h:commandLink></th>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -174,6 +190,16 @@
 								</tr>
 							</tbody>
 						</table>
+						<table class="table" style="border-top: none" id="dataTable"
+							width="100%" cellspacing="0">
+							<tbody>
+								<tr>
+									<th><a
+										href="http://localhost:8080/WebProject/secured/BowlOfContextSpagehtti.jsf">
+											Context Value Hierarchy</a></th>
+								</tr>
+							</tbody>
+						</table>
 
 						<h:panelGroup id="newContext">
 							<table class="table" style="border-top: none" id="dataTable"
@@ -187,7 +213,8 @@
 										<th style="font-weight: normal; vvertical-align: top;"><h:inputTextarea
 												style=" width: 100%"
 												value="#{contextList.contextDescription}">
-												<f:ajax render="newContext" /></h:inputTextarea></th>
+												<f:ajax render="newContext" />
+											</h:inputTextarea></th>
 										<th style="font-weight: normal"><h:commandButton
 												class="btn btn-primary" action="#{contextList.addContext()}"
 												value="add"></h:commandButton></th>

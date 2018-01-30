@@ -38,13 +38,23 @@ text {
 <meta charset="ISO-8859-1">
 <title>BowlOfContextSpagehtti</title>
 </head>
+<table class="table" style="border-top: none" id="dataTable"
+	width="100%" cellspacing="0">
+	<tbody>
+		<tr>
+			<th><a
+				href="http://localhost:8080/WebProject/secured/contextList.xhtml">
+					Back</a></th>
+		</tr>
+	</tbody>
+</table>
 <body>
 	<script src="//d3js.org/d3.v3.min.js"></script>
 	<script>
 		var links = [
 		
 	<%JSONGenerator spagehtti = new JSONGenerator();%>
-	<%=spagehtti.getJSON()%>
+	<%=spagehtti.getContextsAsJSON()%>
 		];
 
 		var nodes = {};
